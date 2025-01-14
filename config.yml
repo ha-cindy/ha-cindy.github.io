@@ -10,24 +10,24 @@ taxonomies:
 
 menu:
     main:
-        - name: Books
-          url: books/
+        - name: About Me
+          url: about/
           weight: 5 
-        - name: Papers
-          url: papers/
+        - name: CV
+          url: cv/
           weight: 2
-        - name: Courses
-          url: courses/
+        - name: Research
+          url: research/
           weight: 3
-        - name: Data
-          url: data/
+        - name: Teaching 
+          url: teaching/
+          weight: 3
+        - name: Art
+          url: art/
           weight: 4 
-        - name: Blog
-          url: https://en.wikipedia.org/wiki/Moritz-Maria_von_Igelfeld_(character)
-          weight: 6
 
 params:
-    description: "I am a Professor of Philology at the Institute of Romance Philology in Regensburg, Germany. My research focuses mostly on Portuguese irregular verbs."
+    description: "I am a research specialist in the Department of Psychology at Princeton University."
     author: Cindy Ha
     # googleAnalyticsID: "G-XXXXX"
     DateFormat: "January 2006"
@@ -53,47 +53,30 @@ params:
     profileMode:
           enabled: true
           title: Cindy Ha
-          subtitle: "I am a research specialist at Princeton University."
-          imageUrl: "picture.jpeg"
+          subtitle: "Hi there! I am a research specialist / lab manager at Princeton University, working with Dr. Anuj Shah and Dr. Betsy Levy Paluck.
+          <br>  <br> I graduated from Northwestern University with a double major in Data Science and Psychology in 2024."
+          imageUrl: "headshot.png"
           imageWidth: 160
           imageHeight: 160
           buttons:
-            - name: Papers
-              url: papers/
-            - name: Courses
-              url: courses/
-            - name: Data
-              url: data/
-            - name: Books
-              url: books/
-            - name: Tags
-              url: tags/
-            - name: Archive
-              url: archive/
-            - name: Blog
-              url: https://en.wikipedia.org/wiki/Moritz-Maria_von_Igelfeld_(character)
+            - name: About Me
+              url: about/
+            - name: CV
+              url: cv/
+            - name: Research
+              url: research/
+            - name: Teaching 
+              url: teaching/
+            - name: Art
+              url: art/
 
     socialIcons:
-        - name: CV
-          url: cv.pdf
         - name: Email
           url: mailto:cindyha@princeton.edu
-        - name: Zoom
-          url: 
-        - name: Location
-          url: location/
-        - name: Office Hours
-          url: officehours/
-        - name: Google Scholar
-          url: 
         - name: GitHub
           url: https://github.com/ha-cindy
-        - name: Substack
-          url: 
-        - name: YouTube
-          url: 
-        - name: Twitter
-          url: 
+        - name: LinkedIn
+          url: https://www.linkedin.com/in/hacindy02/
 
     assets:
         disableScrollBarStyle: true
@@ -102,7 +85,7 @@ params:
         hiddenInSingle: true
     label:
       text: "Cindy Ha"
-      icon: favicon.ico
+      icon: /favicon-miffy.ico
       iconHeight: 18
 
 markup:
