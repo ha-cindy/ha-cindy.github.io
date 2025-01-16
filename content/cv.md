@@ -3,14 +3,7 @@ title: ""
 hidemeta: true
 description: "cv"
 ---
-+ [Download CV](/cv.pdf)
-+ [Download Resume](resume.pdf)
 
-#### Education 
-+ B.A. in Data Science, Northwestern University, 2024
-+ B.A. in Psychology, Northwestern University, 2024
-
-#### Skills 
-+ Programming: R, Python, SQL 
-+ Languages: English, Vietnamese, Spanish 
-
+<div style="text-align: center;">
+  <iframe src="/cv.pdf" style="width: 120%; height: 1000px; border: none;"></iframe>
+</div>

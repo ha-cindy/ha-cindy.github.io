@@ -10,9 +10,6 @@ taxonomies:
 
 menu:
     main:
-        - name: About Me
-          url: about/
-          weight: 5 
         - name: CV
           url: cv/
           weight: 2
@@ -53,14 +50,14 @@ params:
     profileMode:
           enabled: true
           title: Cindy Ha
-          subtitle: "Hi there! I am a research specialist / lab manager at Princeton University, working with Dr. Anuj Shah and Dr. Betsy Levy Paluck.
-          <br>  <br> I graduated from Northwestern University with a double major in Data Science and Psychology in 2024."
+          subtitle: "Hi there! I am a research specialist / lab manager at Princeton University, working with [<u>**Dr. Anuj Shah</u>**](https://anujkshah.com) and [<u>**Dr. Betsy Levy Paluck**</u>](http://www.betsylevypaluck.com/). I graduated from Northwestern University with a double major in Data Science and Psychology in 2024.
+          <br>  <br> **Research Interests** 
+          <br> Broadly speaking, I’m interested in how people make decisions, the types of decisions they make, and how we judge others based on these choices. More specifically, my research examines these dynamics through the lens of socioeconomic class, focusing on how available opportunities and resources are shaped for different groups.
+          <br>  <br> Outside of lab, I enjoy building legos, visiting new restaurants, and creating a list for everything."
           imageUrl: "headshot.png"
           imageWidth: 160
           imageHeight: 160
           buttons:
-            - name: About Me
-              url: about/
             - name: CV
               url: cv/
             - name: Research
@@ -85,8 +82,8 @@ params:
         hiddenInSingle: true
     label:
       text: "Cindy Ha"
-      icon: /favicon-miffy.ico
-      iconHeight: 18
+      icon: /favicon-cat.png
+      iconHeight: 19
 
 markup:
     goldmark:
