@@ -52,11 +52,13 @@ params:
           title: Cindy Ha
           subtitle: "Hi there! I am a research specialist / lab manager at Princeton University, working with [<u>**Dr. Anuj Shah</u>**](https://anujkshah.com) and [<u>**Dr. Betsy Levy Paluck**</u>](http://www.betsylevypaluck.com/). I graduated from Northwestern University with a double major in Data Science and Psychology in 2024.
           <br>  <br> **Research Interests** 
-          <br> Broadly speaking, I’m interested in how people make decisions, the types of decisions they make, and how we judge others based on these choices. More specifically, my research examines these dynamics through the lens of socioeconomic class, focusing on how available opportunities and resources are shaped for different groups.
-          <br>  <br> Outside of lab, I enjoy building legos, visiting new restaurants, and creating a list for everything."
+          <br> Broadly speaking, I’m interested in how people make decisions, the types of decisions they make, and how we judge others based on these choices. More specifically, I am particularly interested in how these dynamics unfold through the lens of socioeconomic class and immigrant status, focusing on how available opportunities and resources are shaped for different groups. By integrating psychological and sociocultural perspectives, my research aims to understand not only the individual decision-making process, but also the broader societal narratives that influence and constrain these choices. 
+          <br>  <br> Outside of lab, I enjoy building legos, visiting new restaurants, and creating a list for everything.
+          <br>  <br>  **News**
+          <br> + *Feb 2025*: First poster acceptance! Will be presenting at the Association for Psychological Science in Washington, D.C. "
           imageUrl: "headshot.png"
-          imageWidth: 160
-          imageHeight: 160
+          imageWidth: 140
+          imageHeight: 140
           buttons:
             - name: CV
               url: cv/
@@ -74,6 +76,8 @@ params:
           url: https://github.com/ha-cindy
         - name: LinkedIn
           url: https://www.linkedin.com/in/hacindy02/
+        - name: Orcid
+          url: https://orcid.org/0009-0008-0757-7028 
 
     assets:
         disableScrollBarStyle: true
