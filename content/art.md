@@ -1,9 +1,9 @@
 ---
-title: "Art"
+title: "art ✐ᝰ"
 description: "by me"
 hidemeta: true
 ---
-Can you guess what I like to draw? Although it's been some time since I last picked up a pencil, I am hoping to get back into it this year!
+Can you guess what I like to draw? Although it's been some time since I last picked up a pencil, I am hoping to get back into it this year! 
 
 <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
   <figure style="text-align: center;">

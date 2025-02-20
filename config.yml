@@ -10,16 +10,16 @@ taxonomies:
 
 menu:
     main:
-        - name: CV
+        - name: about
+          url: about/
+          weight: 2
+        - name: cv
           url: cv/
           weight: 2
-        - name: Research
+        - name: research
           url: research/
           weight: 3
-        - name: Teaching 
-          url: teaching/
-          weight: 3
-        - name: Art
+        - name: art
           url: art/
           weight: 4 
 
@@ -30,7 +30,7 @@ params:
     DateFormat: "January 2006"
     defaultTheme: light
     hideFooter: false
-    disableThemeToggle: true
+    disableThemeToggle: false
     ShowShareButtons: false
     ShowReadingTime: false
     disableSpecial1stPost: true
@@ -50,28 +50,24 @@ params:
     profileMode:
           enabled: true
           title: Cindy Ha
-          subtitle: "Hi there! I am a research specialist / lab manager at Princeton University, working with [<u>**Dr. Anuj Shah</u>**](https://anujkshah.com) and [<u>**Dr. Betsy Levy Paluck**</u>](http://www.betsylevypaluck.com/). I graduated from Northwestern University with a double major in Data Science and Psychology in 2024.
-          <br>  <br> **Research Interests** 
-          <br> Broadly speaking, I’m interested in how people make decisions, the types of decisions they make, and how we judge others based on these choices. More specifically, I am particularly interested in how these dynamics unfold through the lens of socioeconomic class and immigrant status, focusing on how available opportunities and resources are shaped for different groups. By integrating psychological and sociocultural perspectives, my research aims to understand not only the individual decision-making process, but also the broader societal narratives that influence and constrain these choices. 
-          <br>  <br> Outside of lab, I enjoy building legos, visiting new restaurants, and creating a list for everything.
-          <br>  <br>  **News**
-          <br> + *Feb 2025*: First poster acceptance! Will be presenting at the Association for Psychological Science in Washington, D.C. "
           imageUrl: "headshot.png"
           imageWidth: 140
           imageHeight: 140
           buttons:
-            - name: CV
+            - name: about
+              url: about/
+            - name: cv
               url: cv/
-            - name: Research
+            - name: research
               url: research/
-            - name: Teaching 
-              url: teaching/
-            - name: Art
+            - name: art 
               url: art/
 
     socialIcons:
         - name: Email
           url: mailto:cindyha@princeton.edu
+        - name: Bluesky
+          url: https://bsky.app/profile/hacindy.bsky.social
         - name: GitHub
           url: https://github.com/ha-cindy
         - name: LinkedIn

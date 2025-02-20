@@ -5,5 +5,5 @@ description: "cv"
 ---
 
 <div style="text-align: center;">
-  <iframe src="/cv.pdf" style="width: 100%; height: 1000px; border: none;"></iframe>
+  <iframe src="/cv.pdf" style="width: 80%; height: 800px; border: none;"></iframe>
 </div>
