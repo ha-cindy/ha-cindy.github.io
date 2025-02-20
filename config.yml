@@ -14,8 +14,9 @@ menu:
           url: about/
           weight: 2
         - name: cv
-          url: cv/
+          url: /cv.pdf
           weight: 2
+          target: "_blank"
         - name: research
           url: research/
           weight: 3
@@ -29,7 +30,7 @@ params:
     # googleAnalyticsID: "G-XXXXX"
     DateFormat: "January 2006"
     defaultTheme: light
-    hideFooter: false
+    hideFooter: true
     disableThemeToggle: false
     ShowShareButtons: false
     ShowReadingTime: false
@@ -70,10 +71,10 @@ params:
           url: https://bsky.app/profile/hacindy.bsky.social
         - name: GitHub
           url: https://github.com/ha-cindy
-        - name: LinkedIn
-          url: https://www.linkedin.com/in/hacindy02/
         - name: Orcid
           url: https://orcid.org/0009-0008-0757-7028 
+        - name: LinkedIn
+          url: https://www.linkedin.com/in/hacindy02/
 
     assets:
         disableScrollBarStyle: true
