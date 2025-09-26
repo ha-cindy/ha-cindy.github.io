@@ -2,21 +2,22 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Researches on Cindy Ha</title>
-    <link>http://localhost:1313/research/</link>
+    <link>https://ha-cindy.github.io/research/</link>
     <description>Recent content in Researches on Cindy Ha</description>
     <generator>Hugo -- 0.140.2</generator>
     <language>en</language>
-    <atom:link href="http://localhost:1313/research/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://ha-cindy.github.io/research/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>news!</title>
-      <link>http://localhost:1313/research/news/</link>
+      <link>https://ha-cindy.github.io/research/news/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/research/news/</guid>
+      <guid>https://ha-cindy.github.io/research/news/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;I&amp;rsquo;m still at the beginning of my research journey, and so I am lucky to have many exciting things to try, explore, and discover! I hope to cherish and celebrate every little accomplishment along the way, as a reminder that we&amp;rsquo;re all capable of growing into researchers. 🌱&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;˗ˏˋ ★ ˎˊ˗&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;Feb 2025&lt;/em&gt;: First poster acceptance! Will be presenting at the Association for Psychological Science in Washington, D.C.&lt;/p&gt;</description>
+&lt;p&gt;&lt;em&gt;Jun 2024&lt;/em&gt;: Graduated with a B.A. in Data Science and Psychology from Northwestern University in 3 years&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Sep 2024&lt;/em&gt;: Started my full-time lab manager position at Princeton! Midwest -&amp;gt; East Coast&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

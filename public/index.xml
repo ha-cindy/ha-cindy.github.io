@@ -2,96 +2,97 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Cindy Ha</title>
-    <link>http://localhost:1313/</link>
+    <link>https://ha-cindy.github.io/</link>
     <description>Recent content on Cindy Ha</description>
     <generator>Hugo -- 0.140.2</generator>
     <language>en</language>
     <lastBuildDate>Fri, 18 Oct 2024 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://ha-cindy.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Location</title>
-      <link>http://localhost:1313/location/</link>
+      <link>https://ha-cindy.github.io/location/</link>
       <pubDate>Wed, 08 May 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/location/</guid>
+      <guid>https://ha-cindy.github.io/location/</guid>
       <description>Mailing and office addresses at Princeton University.</description>
     </item>
     <item>
       <title>Teaching</title>
-      <link>http://localhost:1313/teaching/</link>
+      <link>https://ha-cindy.github.io/teaching/</link>
       <pubDate>Wed, 08 May 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/teaching/</guid>
+      <guid>https://ha-cindy.github.io/teaching/</guid>
       <description>Teaching experience.</description>
     </item>
     <item>
       <title>Your Inner Hedgehog</title>
-      <link>http://localhost:1313/papers/paper3/</link>
+      <link>https://ha-cindy.github.io/papers/paper3/</link>
       <pubDate>Tue, 06 Apr 2021 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/papers/paper3/</guid>
+      <guid>https://ha-cindy.github.io/papers/paper3/</guid>
       <description>This paper describes the inner hedgehog, a psychological condition widespread in academia. Published in the Journal of Socio-Experimental Psychology, 2021.</description>
     </item>
     <item>
       <title>List of Irregular Verbs Across Romance Languages</title>
-      <link>http://localhost:1313/data/data1/</link>
+      <link>https://ha-cindy.github.io/data/data1/</link>
       <pubDate>Thu, 07 Mar 2013 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/data/data1/</guid>
+      <guid>https://ha-cindy.github.io/data/data1/</guid>
       <description>This dataset contains all irregular verbs in known Romance languages.</description>
     </item>
     <item>
       <title>Unusual Uses For Olive Oil</title>
-      <link>http://localhost:1313/papers/paper1/</link>
+      <link>https://ha-cindy.github.io/papers/paper1/</link>
       <pubDate>Tue, 15 Jan 2013 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/papers/paper1/</guid>
+      <guid>https://ha-cindy.github.io/papers/paper1/</guid>
       <description>This paper reviews unusual uses for olive oil throughout the Mediterranean world. Published in the Journal of Oleic Science, 2013.</description>
     </item>
     <item>
       <title>The Finer Points of Sausage Dogs</title>
-      <link>http://localhost:1313/papers/paper2/</link>
+      <link>https://ha-cindy.github.io/papers/paper2/</link>
       <pubDate>Tue, 28 Dec 2004 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/papers/paper2/</guid>
+      <guid>https://ha-cindy.github.io/papers/paper2/</guid>
       <description>This paper studies the pulmonary efficiency of sausage dogs. Published in the Journal of Canine Science, 2004.</description>
     </item>
     <item>
       <title>Lectures at the Villa of Reduced Circumstances</title>
-      <link>http://localhost:1313/courses/course1/</link>
+      <link>https://ha-cindy.github.io/courses/course1/</link>
       <pubDate>Mon, 10 Mar 2003 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/courses/course1/</guid>
+      <guid>https://ha-cindy.github.io/courses/course1/</guid>
       <description>This graduate course presents classical results in Romance philology.</description>
     </item>
     <item>
       <title>Profanity in Early Irish</title>
-      <link>http://localhost:1313/courses/course2/</link>
+      <link>https://ha-cindy.github.io/courses/course2/</link>
       <pubDate>Sat, 16 Jun 1990 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/courses/course2/</guid>
+      <guid>https://ha-cindy.github.io/courses/course2/</guid>
       <description>This undergraduate course discusses profanity in Early Irish.</description>
     </item>
     <item>
       <title></title>
-      <link>http://localhost:1313/about/</link>
+      <link>https://ha-cindy.github.io/about/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/about/</guid>
-      <description>&lt;h2 id=&#34;about-me-&#34;&gt;about me 🇻🇳&lt;/h2&gt;
-&lt;p&gt;Hi there! I am a research specialist / lab manager at Princeton University, working with &lt;a href=&#34;https://anujkshah.com&#34; target=&#34;_blank&#34;&gt;&lt;strong&gt;Dr. Anuj Shah&lt;/strong&gt;&lt;/a&gt; and &lt;a href=&#34;http://www.betsylevypaluck.com/&#34; target=&#34;_blank&#34;&gt;&lt;strong&gt;Dr. Betsy Levy Paluck&lt;/strong&gt;&lt;/a&gt;. I graduated from Northwestern University with a double major in Data Science and Psychology in 2024. I plan on applying to graduate school in the 2025 cycle.&lt;/p&gt;
-&lt;h4 id=&#34;research-interests&#34;&gt;&lt;strong&gt;Research Interests&lt;/strong&gt;&lt;/h4&gt;
-&lt;p&gt;Broadly speaking, I’m interested in how people make decisions, the types of decisions they make, and how we judge others based on these choices. More specifically, I am particularly interested in how these dynamics unfold through the lens of socioeconomic class and immigrant status, focusing on how available opportunities and resources are shaped for different groups. This is motivated by my background as a first-generation, low-income college student and immigrant.
-By integrating psychological and sociocultural perspectives, my research aims to understand not only the individual decision-making process, but also the broader societal narratives that influence and constrain these choices.&lt;/p&gt;</description>
+      <guid>https://ha-cindy.github.io/about/</guid>
+      <description>&lt;h2 id=&#34;about-me&#34;&gt;about me&lt;/h2&gt;
+&lt;p&gt;|˶˙ᵕ˙ )ﾉﾞ&lt;/p&gt;
+&lt;p&gt;Hi there!&lt;/p&gt;
+&lt;p&gt;I am a research specialist / lab manager at Princeton University, working with &lt;a href=&#34;https://anujkshah.com&#34; target=&#34;_blank&#34;&gt;&lt;strong&gt;Dr. Anuj Shah&lt;/strong&gt;&lt;/a&gt; and &lt;a href=&#34;http://www.betsylevypaluck.com/&#34; target=&#34;_blank&#34;&gt;&lt;strong&gt;Dr. Betsy Levy Paluck&lt;/strong&gt;&lt;/a&gt;. I graduated from Northwestern University with a double major in Data Science and Psychology in 2024.&lt;/p&gt;
+&lt;p&gt;I love exploring how data and people connect, intersect, and interact! I&amp;rsquo;m a data analyst who views the world through people&amp;ndash;looking at ways we understand, make, and judge decisions in the real world.&lt;/p&gt;</description>
     </item>
     <item>
       <title></title>
-      <link>http://localhost:1313/art/</link>
+      <link>https://ha-cindy.github.io/art/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/art/</guid>
+      <guid>https://ha-cindy.github.io/art/</guid>
       <description>by me</description>
     </item>
     <item>
       <title>news!</title>
-      <link>http://localhost:1313/research/news/</link>
+      <link>https://ha-cindy.github.io/research/news/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/research/news/</guid>
+      <guid>https://ha-cindy.github.io/research/news/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;I&amp;rsquo;m still at the beginning of my research journey, and so I am lucky to have many exciting things to try, explore, and discover! I hope to cherish and celebrate every little accomplishment along the way, as a reminder that we&amp;rsquo;re all capable of growing into researchers. 🌱&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;˗ˏˋ ★ ˎˊ˗&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;Feb 2025&lt;/em&gt;: First poster acceptance! Will be presenting at the Association for Psychological Science in Washington, D.C.&lt;/p&gt;</description>
+&lt;p&gt;&lt;em&gt;Jun 2024&lt;/em&gt;: Graduated with a B.A. in Data Science and Psychology from Northwestern University in 3 years&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Sep 2024&lt;/em&gt;: Started my full-time lab manager position at Princeton! Midwest -&amp;gt; East Coast&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

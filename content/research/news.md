@@ -7,4 +7,12 @@ hidemeta: true
 
 ˗ˏˋ ★ ˎˊ˗
 
-*Feb 2025*: First poster acceptance! Will be presenting at the Association for Psychological Science in Washington, D.C.
+*Jun 2024*: Graduated with a B.A. in Data Science and Psychology from Northwestern University in 3 years 
+
+*Sep 2024*: Started my full-time lab manager position at Princeton! Midwest -> East Coast 
+
+*Feb 2025*: First poster acceptance! 
+
+*May 2025*: Attended my first conference (Association for Psychological Science in Washington, D.C.) and presented my work on the "Impossible Expectations for the Poor" project. Had the bestest time and made a dear friend!
+
+*Sep 2025*: One year at Princeton 🐯🧡

@@ -71,8 +71,6 @@ params:
           url: https://bsky.app/profile/hacindy.bsky.social
         - name: GitHub
           url: https://github.com/ha-cindy
-        - name: Orcid
-          url: https://orcid.org/0009-0008-0757-7028 
         - name: LinkedIn
           url: https://www.linkedin.com/in/hacindy02/
 
