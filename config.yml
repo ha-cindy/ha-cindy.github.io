@@ -12,20 +12,23 @@ menu:
     main:
         - name: about
           url: about/
+          weight: 1
+        - name: projects
+          url: projects/
           weight: 2
         - name: cv
           url: /cv.pdf
-          weight: 2
+          weight: 3
           target: "_blank"
         - name: research
           url: research/
-          weight: 3
+          weight: 4
         - name: art
           url: art/
-          weight: 4 
+          weight: 5
 
 params:
-    description: "I am a research specialist in the Department of Psychology at Princeton University."
+    description: "Obsessed with spreadsheets and people-watching. Data anlayst & researcher blending behavioral science with data."
     author: Cindy Ha
     # googleAnalyticsID: "G-XXXXX"
     DateFormat: "January 2006"
@@ -51,28 +54,27 @@ params:
     profileMode:
           enabled: true
           title: Cindy Ha
+          subtitle: "Obsessed with spreadsheets and people-watching. <br> Data analyst & researcher blending behavioral science with data."
           imageUrl: "headshot.png"
           imageWidth: 140
           imageHeight: 140
           buttons:
             - name: about
               url: about/
+            - name: projects
+              url: projects/
             - name: cv
               url: cv/
-            - name: research
-              url: research/
-            - name: art 
-              url: art/
 
     socialIcons:
         - name: Email
           url: mailto:cindyha@princeton.edu
-        - name: Bluesky
-          url: https://bsky.app/profile/hacindy.bsky.social
-        - name: GitHub
-          url: https://github.com/ha-cindy
         - name: LinkedIn
           url: https://www.linkedin.com/in/hacindy02/
+        - name: GitHub
+          url: https://github.com/ha-cindy
+        - name: Bluesky
+          url: https://bsky.app/profile/hacindy.bsky.social
 
     assets:
         disableScrollBarStyle: true
