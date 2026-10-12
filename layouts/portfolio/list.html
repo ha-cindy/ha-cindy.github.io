@@ -14,7 +14,7 @@
     {{- if not $isRoot }}<nav class="crumbs" aria-label="Breadcrumb"><a href="{{ "/portfolio/" | relURL }}">portfolio</a><span>/</span><span>{{ .Params.linkTitle | default .Title }}</span></nav>{{ end }}
     <div class="section-head">
       <div>
-        <span class="eyebrow">{{ partial "sparkle.html" (dict "size" 12 "class" "is-red") }} {{ if $isRoot }}all work{{ else }}{{ .Params.course | default "collection" | lower }}{{ end }}</span>
+        <span class="eyebrow">{{ partial "sparkle.html" (dict "size" 12 "class" "is-red") }} {{ if $isRoot }}all work{{ else }}collection · {{ len $pages }} case studies{{ end }}</span>
         <h1 class="funky h2">{{ .Title }}</h1>
       </div>
       <p>{{ .Params.summary | default .Summary | plainify | htmlUnescape }}</p>
@@ -42,12 +42,12 @@
       <span class="filterbar__label">filter by skill:</span>
       <div class="chips" data-filter>
         <button class="chip" type="button" data-filter-tag="" aria-pressed="true">all <b>{{ len $pages }}</b></button>
-        {{- range $tags }}
-          {{- $t := . }}
+        {{- range $i, $t := $tags }}
           {{- $n := 0 }}
           {{- range $pages }}{{ if in .Params.skills $t }}{{ $n = add $n 1 }}{{ end }}{{ end }}
-          <button class="chip" type="button" data-filter-tag="{{ $t | urlize }}" aria-pressed="false">{{ $t }} <b>{{ $n }}</b></button>
+          <button class="chip{{ if ge $i 7 }} is-extra{{ end }}" type="button" data-filter-tag="{{ $t | urlize }}" aria-pressed="false">{{ $t }} <b>{{ $n }}</b></button>
         {{- end }}
+        {{- if gt (len $tags) 7 }}<button class="chip chip--ghost" type="button" data-more-chips aria-expanded="false">+ {{ sub (len $tags) 7 }} more</button>{{ end }}
       </div>
     </div>
     {{- end }}

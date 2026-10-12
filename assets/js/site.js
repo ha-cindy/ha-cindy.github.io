@@ -96,7 +96,35 @@
     setTimeout(function () { s.remove(); }, 820);
   }, { passive: true });
 
-  /* ---------- chip filters (portfolio, cv, art) ---------- */
+  /* ---------- card spotlight ---------- */
+  if (finePointer && !reduceMotion) {
+    document.addEventListener('pointermove', function (e) {
+      var c = e.target.closest && e.target.closest('.card');
+      if (!c) return;
+      var r = c.getBoundingClientRect();
+      c.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+      c.style.setProperty('--my', (e.clientY - r.top) + 'px');
+    }, { passive: true });
+  }
+
+  /* ---------- entrance motion (below-the-fold only, never hides the first screen) ---------- */
+  if (!reduceMotion && 'IntersectionObserver' in window) {
+    var targets = Array.prototype.slice.call(document.querySelectorAll('main > .win, main > section, .grid > .card, .slides > .slide-btn, .gallery > .gallery__item, .pager'));
+    var vh = window.innerHeight;
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) { en.target.classList.add('is-in'); io.unobserve(en.target); }
+      });
+    }, { rootMargin: '0px 0px -8% 0px' });
+    targets.forEach(function (el, i) {
+      if (el.getBoundingClientRect().top < vh * 0.92) return;
+      el.classList.add('reveal');
+      el.style.transitionDelay = ((i % 3) * 60) + 'ms';
+      io.observe(el);
+    });
+  }
+
+  /* ---------- chip filters (portfolio, cv) ---------- */
   function setupFilter(groupSel, attr, itemSel, itemAttr, eventName, onChange) {
     var group = document.querySelector(groupSel);
     if (!group) return;
@@ -118,14 +146,24 @@
       if (val) track(eventName, { value: val });
     });
   }
+  var moreBtn = document.querySelector('[data-more-chips]');
+  if (moreBtn) {
+    var moreLabel = moreBtn.textContent;
+    moreBtn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      var g = moreBtn.closest('[data-filter]');
+      var open = g.classList.toggle('is-open');
+      moreBtn.setAttribute('aria-expanded', String(open));
+      moreBtn.textContent = open ? '− fewer' : moreLabel;
+    });
+  }
   var countLabel = document.querySelector('[data-count-label]');
   setupFilter('[data-filter]', 'data-filter-tag', '[data-filter-grid] .card', 'data-tags', 'portfolio_filter', function (n) {
     if (countLabel) countLabel.textContent = n + (n === 1 ? ' item' : ' items');
   });
   setupFilter('[data-tl-filter]', 'data-kind', '.timeline .tl', 'data-kind', 'cv_filter');
-  setupFilter('[data-art-filter]', 'data-medium', '.gallery__item', 'data-medium', 'art_filter');
 
-  /* ---------- lightbox (art + case study slides) ---------- */
+  /* ---------- lightbox (case study slides) ---------- */
   var lb = document.getElementById('lightbox');
   if (lb && typeof lb.showModal === 'function') {
     var lbImg = lb.querySelector('[data-lb-img]');
@@ -193,18 +231,16 @@
 
     var commands = {
       help: function () {
-        print('<b>about</b>      who i am\n<b>portfolio</b>  all case studies\n<b>aim</b>        the duolingo aim collection\n<b>cv</b>         interactive cv\n<b>resume</b>     open the pdf\n<b>research</b>   research news\n<b>art</b>        the gallery\n<b>contact</b>    email + links\n<b>theme</b>      light / dark\n<b>sparkles</b>   cursor trail on / off\n<b>clear</b>      clear the screen\n<b>exit</b>       close terminal');
+        print('<b>about</b>      who i am\n<b>portfolio</b>  all case studies\n<b>duolingo</b>   the duolingo collection\n<b>cv</b>         interactive cv\n<b>resume</b>     open the pdf\n<b>contact</b>    email + links\n<b>theme</b>      light / dark\n<b>sparkles</b>   cursor trail on / off\n<b>clear</b>      clear the screen\n<b>exit</b>       close terminal');
       },
       whoami: function () { print(esc(data.tagline || 'cindy ha')); print('seeking: ' + esc(data.seeking || '')); },
       about: function () { go('/about/', 'about'); },
       portfolio: function () { go('/portfolio/', 'portfolio'); },
       projects: function () { go('/portfolio/', 'portfolio'); },
-      aim: function () { go('/portfolio/duolingo-aim/', 'duolingo aim'); },
-      duolingo: function () { go('/portfolio/duolingo-aim/', 'duolingo aim'); },
+      aim: function () { go('/portfolio/duolingo-aim/', 'duolingo'); },
+      duolingo: function () { go('/portfolio/duolingo-aim/', 'duolingo'); },
       cv: function () { go('/cv/', 'cv'); },
       resume: function () { track('cv_download', { location: 'terminal' }); go('/cv.pdf', 'cv.pdf'); },
-      research: function () { go('/research/', 'research'); },
-      art: function () { go('/art/', 'art'); },
       home: function () { go('/', 'home'); },
       contact: function () {
         print('email: <a href="mailto:' + esc(data.email) + '" data-track="contact_click" data-track-method="terminal">' + esc(data.email) + '</a>');
@@ -217,7 +253,7 @@
       },
       clear: function () { log.innerHTML = ''; },
       exit: function () { term.close(); },
-      ls: function () { print('about/  portfolio/  cv/  research/  art/  cv.pdf'); },
+      ls: function () { print('about/  portfolio/  cv/  cv.pdf'); },
       sudo: function (args) {
         if (/hire/.test(args)) { print('permission granted ✦ opening contact…'); commands.contact(); track('easter_egg', { command: 'sudo hire' }); }
         else print('nice try.');

@@ -21,7 +21,7 @@
     <div class="hero__aside">
       <figure class="avatar">
         {{- with resources.Get "img/headshot.png" }}
-        {{- $img := .Fill "520x520 webp q82 Center" }}
+        {{- $img := (.Crop "930x930 Center").Resize "520x webp q84" }}
         <img src="{{ $img.RelPermalink }}" width="220" height="220" alt="Portrait of Cindy Ha">
         {{- end }}
         <figcaption class="avatar__badge"><span class="dot" aria-hidden="true"></span>online</figcaption>
@@ -95,7 +95,7 @@
         <span class="eyebrow">{{ partial "sparkle.html" (dict "size" 12 "class" "is-red") }} a quick peek at my portfolio</span>
         <h2 id="featured-title" class="funky h2">{{ $peek.Title }}</h2>
       </div>
-      <p>{{ with $peek.Params.course }}{{ . | lower }}. {{ end }}{{ $peek.Params.summary | default $peek.Summary | plainify | htmlUnescape }}</p>
+      <p>{{ $peek.Params.summary | default ($peek.Params.course | lower) }}</p>
     </div>
     <div class="grid">
       {{- range $projects.ByWeight }}{{ partial "card.html" . }}{{ end }}

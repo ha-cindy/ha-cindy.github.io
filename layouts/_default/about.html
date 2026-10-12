@@ -1,0 +1,40 @@
+{{ define "main" }}
+<article class="win">
+  <div class="win__bar chrome-bar">
+    <span class="win__title">about_me.md</span>
+    <div class="win__ctrls"><span class="win__btn" aria-hidden="true"></span><span class="win__btn is-red" aria-hidden="true"></span></div>
+  </div>
+  <div class="win__body stack" style="gap: 24px">
+    <span class="eyebrow">{{ partial "sparkle.html" (dict "size" 12 "class" "is-red") }} cat about_me.md</span>
+    <h1 class="funky h2">hi, i'm cindy</h1>
+    <div class="prose">{{ .Content }}</div>
+  </div>
+</article>
+
+{{- with .Params.milestones }}
+<section class="win" aria-label="Milestones">
+  <div class="win__bar chrome-bar">
+    <span class="win__title">changelog.md</span>
+    <div class="win__ctrls"><span class="win__meta">{{ len . }} entries</span></div>
+  </div>
+  <div class="win__body stack" style="gap: 24px">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">{{ partial "sparkle.html" (dict "size" 12 "class" "is-red") }} git log --oneline</span>
+        <h2 class="funky h2">milestones</h2>
+      </div>
+    </div>
+    <ol class="timeline">
+      {{- range $i, $m := . }}
+      <li class="tl{{ if eq $i 0 }} is-current{{ end }}">
+        <div class="tl__head">
+          <span class="tl__when">{{ $m.when | lower }}</span>
+        </div>
+        <p class="milestone">{{ $m.text | markdownify }}</p>
+      </li>
+      {{- end }}
+    </ol>
+  </div>
+</section>
+{{- end }}
+{{ end }}

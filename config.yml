@@ -17,12 +17,6 @@ menu:
         - name: cv
           url: /cv/
           weight: 3
-        - name: research
-          url: /research/
-          weight: 4
-        - name: art
-          url: /art/
-          weight: 5
 
 params:
     description: "Data analyst and researcher blending behavioral science with data. M.S. Marketing Analytics and Insights at Rutgers Business School."
