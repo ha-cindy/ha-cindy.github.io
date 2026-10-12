@@ -2,7 +2,7 @@
 title: "Where can Duolingo fly?"
 assignment: 1
 weight: 1
-featured: true
+featured: false
 summary: "competitive scan and segmentation to find Duolingo's next segment."
 deliverable: "9-slide strategy deck"
 skills: ["Competitive analysis", "Segmentation", "Market research"]

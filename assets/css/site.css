@@ -607,3 +607,7 @@ body::after {
 /* about: milestones changelog */
 .milestone { font-size: 16.5px; line-height: 1.55; color: var(--ink-2); max-width: 64ch; }
 .timeline .tl__head { justify-content: flex-start; }
+
+/* home quick peek: two cards share the row */
+.grid--2 { grid-template-columns: repeat(auto-fit, minmax(min(100%, 360px), 1fr)); }
+.grid--2 .card__thumb { height: 220px; }

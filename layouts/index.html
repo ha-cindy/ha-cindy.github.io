@@ -78,8 +78,8 @@
 </section>
 
 {{- $peek := site.GetPage (site.Params.homePeek | default "/portfolio") }}
-{{- $projects := where $peek.RegularPagesRecursive "Params.featured" true }}
-{{- if not $projects }}{{ $projects = first 3 $peek.RegularPagesRecursive.ByWeight }}{{ end }}
+{{- $projects := first 2 (where $peek.RegularPagesRecursive.ByWeight "Params.featured" true) }}
+{{- if not $projects }}{{ $projects = first 2 $peek.RegularPagesRecursive.ByWeight }}{{ end }}
 {{- $all := where site.RegularPages "Section" "portfolio" }}
 <section class="win" aria-labelledby="featured-title">
   <div class="win__bar win__bar--dark">
@@ -97,8 +97,8 @@
       </div>
       <p>{{ $peek.Params.summary | default ($peek.Params.course | lower) }}</p>
     </div>
-    <div class="grid">
-      {{- range $projects.ByWeight }}{{ partial "card.html" . }}{{ end }}
+    <div class="grid grid--2">
+      {{- range $projects }}{{ partial "card.html" . }}{{ end }}
     </div>
     <div><a class="link-arrow" href="{{ $peek.RelPermalink }}">see all {{ len $peek.RegularPagesRecursive }} case studies <span aria-hidden="true">→</span></a></div>
   </div>
