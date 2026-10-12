@@ -664,3 +664,7 @@ body::after {
 /* three window dots */
 .win__ctrls { gap: 12px; }
 .win__dots { display: inline-flex; gap: 7px; align-items: center; }
+
+/* about tab: all lowercase */
+.about-lc .prose, .about-lc .code-card, .about-lc .changelog__text { text-transform: lowercase; }
+.about-lc .code-card .k, .about-lc .code-card .var { text-transform: none; }

@@ -1,5 +1,5 @@
 {{ define "main" }}
-<article class="win">
+<article class="win about-lc">
   <div class="win__bar chrome-bar">
     <span class="win__title">about_me.md</span>
     {{ partial "dots.html" (dict) }}
@@ -12,7 +12,7 @@
 </article>
 
 {{- with .Params.fun_facts }}
-<section class="win" aria-label="Fun facts">
+<section class="win about-lc" aria-label="Fun facts">
   <div class="win__bar chrome-bar">
     <span class="win__title">fun_facts.js</span>
     {{ partial "dots.html" (dict) }}
@@ -43,7 +43,7 @@
 {{- end }}
 
 {{- with .Params.milestones }}
-<section class="win" aria-label="Milestones">
+<section class="win about-lc" aria-label="Milestones">
   <div class="win__bar chrome-bar">
     <span class="win__title">changelog.md</span>
     {{ partial "dots.html" (dict "meta" (printf "%d entries" (len .))) }}
