@@ -1,0 +1,71 @@
+{{ define "main" }}
+<article class="win about-lc">
+  <div class="win__bar chrome-bar">
+    <span class="win__title">about_me.md</span>
+    {{ partial "dots.html" (dict) }}
+  </div>
+  <div class="win__body stack" style="gap: 24px">
+    <span class="eyebrow">{{ partial "sparkle.html" (dict "size" 12 "class" "is-red") }} cat about_me.md</span>
+    <h1 class="funky h2">hi, i'm cindy</h1>
+    <div class="prose">{{ .Content }}</div>
+  </div>
+</article>
+
+{{- with .Params.fun_facts }}
+<section class="win about-lc" aria-label="Fun facts">
+  <div class="win__bar chrome-bar">
+    <span class="win__title">fun_facts.js</span>
+    {{ partial "dots.html" (dict) }}
+  </div>
+  <div class="win__body stack" style="gap: 24px">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">{{ partial "sparkle.html" (dict "size" 12 "class" "is-red") }} node fun_facts.js</span>
+        <h2 class="funky h2">fun facts</h2>
+      </div>
+    </div>
+    <div class="code-card" role="list">
+      <div class="code-card__line"><span class="kw">const</span> <span class="var">funFacts</span> = {</div>
+      {{- range . }}
+      <div class="code-card__row" role="listitem">
+        <span class="k">{{ .key }}:</span>
+        {{- if reflect.IsSlice .value }}
+        <span class="v">[{{ range $i, $v := .value }}{{ if $i }}, {{ end }}<span class="str">"{{ $v }}"</span>{{ end }}],</span>
+        {{- else }}
+        <span class="v"><span class="str">"{{ .value }}"</span>,</span>
+        {{- end }}
+      </div>
+      {{- end }}
+      <div class="code-card__line">};</div>
+    </div>
+  </div>
+</section>
+{{- end }}
+
+{{- with .Params.milestones }}
+<section class="win about-lc" aria-label="Milestones">
+  <div class="win__bar chrome-bar">
+    <span class="win__title">changelog.md</span>
+    {{ partial "dots.html" (dict "meta" (printf "%d entries" (len .))) }}
+  </div>
+  <div class="win__body stack" style="gap: 24px">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">{{ partial "sparkle.html" (dict "size" 12 "class" "is-red") }} git log --oneline</span>
+        <h2 class="funky h2">milestones</h2>
+      </div>
+    </div>
+    <div class="changelog" tabindex="0" aria-label="Milestones, scrollable">
+      <ol>
+        {{- range $i, $m := . }}
+        <li{{ if eq $i 0 }} class="is-current"{{ end }}>
+          <span class="changelog__when">{{ $m.when | lower }}</span>
+          <span class="changelog__text">{{ $m.text | markdownify }}</span>
+        </li>
+        {{- end }}
+      </ol>
+    </div>
+  </div>
+</section>
+{{- end }}
+{{ end }}

@@ -2,7 +2,7 @@
 <section class="win">
   <div class="win__bar chrome-bar">
     <span class="win__title">C:\{{ .Section | default (.Title | urlize) }}\</span>
-    <div class="win__ctrls"><span class="win__btn" aria-hidden="true"></span><span class="win__btn is-red" aria-hidden="true"></span></div>
+    {{ partial "dots.html" (dict) }}
   </div>
   <div class="win__body scan stack" style="gap: 24px">
     <div class="section-head">

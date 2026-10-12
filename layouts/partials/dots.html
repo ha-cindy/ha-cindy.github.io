@@ -1,0 +1,9 @@
+{{- /* Three window dots like iOS/macOS. Pass (dict "meta" "text" "min" true) — both optional. */ -}}
+<div class="win__ctrls">
+  {{- with .meta }}<span class="win__meta">{{ . }}</span>{{ end }}
+  <span class="win__dots">
+    {{- if .min }}<button class="win__btn" type="button" data-min aria-label="Minimize window" aria-expanded="true"></button>{{ else }}<span class="win__btn" aria-hidden="true"></span>{{ end }}
+    <span class="win__btn" aria-hidden="true"></span>
+    <span class="win__btn is-red" aria-hidden="true"></span>
+  </span>
+</div>

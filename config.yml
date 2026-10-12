@@ -17,21 +17,15 @@ menu:
         - name: cv
           url: /cv/
           weight: 3
-        - name: research
-          url: /research/
-          weight: 4
-        - name: art
-          url: /art/
-          weight: 5
 
 params:
-    description: "Data analyst and researcher blending behavioral science with data. M.S. Marketing Analytics and Insights at Rutgers Business School."
+    description: "Marketing analytics and insights at Rutgers. Obsessed with spreadsheets and people-watching. Portfolio, case studies, and CV."
     tagline: "obsessed with spreadsheets and people-watching. i blend behavioral science with data to understand why people do what they do."
     author: Cindy Ha
     googleAnalyticsID: "G-XLPXPQYZ4Q"
     email: "hacindy02@gmail.com"
     location: "Rutgers Business School"
-    studying: "m.s. marketing analytics & insights ('27)"
+    studying: "m.s. marketing analytics & insights"
     seeking: "marketing/consumer insights roles"
     # which portfolio collection gets the "quick peek" on the home page
     homePeek: "/portfolio/duolingo-aim"

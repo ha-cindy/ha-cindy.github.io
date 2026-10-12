@@ -8,13 +8,13 @@
 <section class="win">
   <div class="win__bar win__bar--dark">
     <span class="win__title">C:\portfolio\{{ if not $isRoot }}{{ .Params.linkTitle | default .Title | lower | replaceRE "[^a-z0-9]+" "_" }}\{{ end }}</span>
-    <div class="win__ctrls"><span class="win__meta" data-count-label>{{ len $pages }} items</span></div>
+    <div class="win__ctrls"><span class="win__meta" data-count-label>{{ len $pages }} items</span><span class="win__dots"><span class="win__btn" aria-hidden="true"></span><span class="win__btn" aria-hidden="true"></span><span class="win__btn is-red" aria-hidden="true"></span></span></div>
   </div>
   <div class="win__body stack" style="gap: 28px">
     {{- if not $isRoot }}<nav class="crumbs" aria-label="Breadcrumb"><a href="{{ "/portfolio/" | relURL }}">portfolio</a><span>/</span><span>{{ .Params.linkTitle | default .Title }}</span></nav>{{ end }}
     <div class="section-head">
       <div>
-        <span class="eyebrow">{{ partial "sparkle.html" (dict "size" 12 "class" "is-red") }} {{ if $isRoot }}all work{{ else }}{{ .Params.course | default "collection" | lower }}{{ end }}</span>
+        <span class="eyebrow">{{ partial "sparkle.html" (dict "size" 12 "class" "is-red") }} {{ if $isRoot }}all work{{ else }}collection · {{ len $pages }} case studies{{ end }}</span>
         <h1 class="funky h2">{{ .Title }}</h1>
       </div>
       <p>{{ .Params.summary | default .Summary | plainify | htmlUnescape }}</p>
@@ -29,7 +29,6 @@
       <span class="collection__text">
         <span class="eyebrow">collection · {{ len .RegularPages }} case studies</span>
         <span class="h3">{{ .Params.linkTitle | default .Title | lower }}</span>
-        <span class="muted">{{ .Params.course | lower }}</span>
         <span>{{ .Params.summary | default .Summary | plainify | htmlUnescape }}</span>
         <span class="link-arrow">open collection <span aria-hidden="true">→</span></span>
       </span>
@@ -42,12 +41,12 @@
       <span class="filterbar__label">filter by skill:</span>
       <div class="chips" data-filter>
         <button class="chip" type="button" data-filter-tag="" aria-pressed="true">all <b>{{ len $pages }}</b></button>
-        {{- range $tags }}
-          {{- $t := . }}
+        {{- range $i, $t := $tags }}
           {{- $n := 0 }}
           {{- range $pages }}{{ if in .Params.skills $t }}{{ $n = add $n 1 }}{{ end }}{{ end }}
-          <button class="chip" type="button" data-filter-tag="{{ $t | urlize }}" aria-pressed="false">{{ $t }} <b>{{ $n }}</b></button>
+          <button class="chip{{ if ge $i 7 }} is-extra{{ end }}" type="button" data-filter-tag="{{ $t | urlize }}" aria-pressed="false">{{ $t }} <b>{{ $n }}</b></button>
         {{- end }}
+        {{- if gt (len $tags) 7 }}<button class="chip chip--ghost" type="button" data-more-chips aria-expanded="false">+ {{ sub (len $tags) 7 }} more</button>{{ end }}
       </div>
     </div>
     {{- end }}

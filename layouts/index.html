@@ -1,17 +1,11 @@
 {{ define "main" }}
-<section class="hero">
-  <div class="win hero__main">
-    <div class="win__bar chrome-bar">
-      <span class="win__title">SYS://hello_world</span>
-      <div class="win__ctrls">
-        <button class="win__btn" type="button" data-min aria-label="Minimize window" aria-expanded="true"></button>
-        <span class="win__btn" aria-hidden="true"></span>
-        <span class="win__btn is-red" aria-hidden="true"></span>
-      </div>
-    </div>
-    <div class="win__body scan">
-      {{ partial "sparkle.html" (dict "size" 44 "class" "hero__deco hero__deco--a") }}
-      {{ partial "sparkle.html" (dict "size" 16 "class" "hero__deco hero__deco--b is-red") }}
+<section class="win hero" aria-label="Introduction">
+  <div class="win__bar chrome-bar">
+    <span class="win__title">sys://hello_world</span>
+    {{ partial "dots.html" (dict "min" true) }}
+  </div>
+  <div class="win__body hero__body">
+    <div class="hero__text">
       <button class="prompt" type="button" data-term-open>&gt; whoami<span class="cursor" aria-hidden="true"></span></button>
       <h1 class="funky h1 chrome-text is-shine">cindy ha</h1>
       <p class="lede">{{ site.Params.tagline }}</p>
@@ -20,29 +14,25 @@
         <a class="btn btn--chrome" href="{{ "/cv/" | relURL }}">cv ↗</a>
       </div>
     </div>
-  </div>
-
-  <div class="hero__side">
-    <div class="win win--sm">
-      <div class="win__bar chrome-bar">
-        <span class="win__title">me.png</span>
-        <div class="win__ctrls"><span class="win__btn" aria-hidden="true"></span></div>
-      </div>
-      <div class="portrait">
-        <div class="portrait__frame">
-          {{- with resources.Get "img/headshot.png" }}
-          {{- $img := .Fill "560x560 webp q80 Center" }}
-          <img src="{{ $img.RelPermalink }}" width="280" height="280" alt="Portrait of Cindy Ha">
-          {{- end }}
+    <div class="hero__aside">
+      <figure class="avatar">
+        {{- with resources.Get "img/headshot.png" }}
+        {{- $img := (.Crop "930x930 Center").Resize "520x webp q84" }}
+        <img src="{{ $img.RelPermalink }}" width="220" height="220" alt="Portrait of Cindy Ha">
+        {{- end }}
+        <figcaption class="avatar__badge"><span class="dot" aria-hidden="true"></span>online</figcaption>
+      </figure>
+      <div class="status" role="status" aria-label="Status">
+        <div class="status__file">me.json</div>
+<div class="status__code" aria-label="Status details">
+          <span class="p">{</span>
+          <div class="kv"><span class="k">"loc":</span><span class="v">"{{ site.Params.location | lower }}",</span></div>
+          <div class="kv"><span class="k">"studying":</span><span class="v">"{{ site.Params.studying }}",</span></div>
+          <div class="kv"><span class="k">"seeking":</span><span class="v">"{{ site.Params.seeking }}"</span></div>
+          <span class="p">}</span>
         </div>
+        <button type="button" data-zuzu-toggle aria-pressed="true">zuzu the cat: on</button>
       </div>
-    </div>
-    <div class="status" role="status">
-      <div class="status__live"><span class="dot" aria-hidden="true"></span>status: online</div>
-      <div class="status__row">loc: <b>{{ site.Params.location }}</b></div>
-      <div class="status__row">studying: <b>{{ site.Params.studying }}</b></div>
-      <div class="status__row">seeking: <b>{{ site.Params.seeking }}</b></div>
-      <button type="button" data-sparkle-toggle aria-pressed="true">✦ sparkles: on</button>
     </div>
   </div>
 </section>
@@ -50,10 +40,7 @@
 <section class="win" aria-label="About me">
   <div class="win__bar chrome-bar">
     <span class="win__title">about_me.txt</span>
-    <div class="win__ctrls">
-      <button class="win__btn" type="button" data-min aria-label="Minimize window" aria-expanded="true"></button>
-      <span class="win__btn is-red" aria-hidden="true"></span>
-    </div>
+    {{ partial "dots.html" (dict "min" true) }}
   </div>
   <div class="win__body about">
     <div class="about__col">
@@ -84,16 +71,13 @@
 </section>
 
 {{- $peek := site.GetPage (site.Params.homePeek | default "/portfolio") }}
-{{- $projects := where $peek.RegularPagesRecursive "Params.featured" true }}
-{{- if not $projects }}{{ $projects = first 3 $peek.RegularPagesRecursive.ByWeight }}{{ end }}
+{{- $projects := first 2 (where $peek.RegularPagesRecursive.ByWeight "Params.featured" true) }}
+{{- if not $projects }}{{ $projects = first 2 $peek.RegularPagesRecursive.ByWeight }}{{ end }}
 {{- $all := where site.RegularPages "Section" "portfolio" }}
 <section class="win" aria-labelledby="featured-title">
   <div class="win__bar win__bar--dark">
     <span class="win__title">C:\portfolio\{{ $peek.Params.linkTitle | default $peek.Title | lower | replaceRE "[^a-z0-9]+" "_" }}\</span>
-    <div class="win__ctrls">
-      <span class="win__meta">{{ len $projects }} of {{ len $peek.RegularPagesRecursive }} items</span>
-      <button class="win__btn" type="button" data-min aria-label="Minimize window" aria-expanded="true"></button>
-    </div>
+    {{ partial "dots.html" (dict "min" true "meta" (printf "%d of %d items" (len $projects) (len $peek.RegularPagesRecursive))) }}
   </div>
   <div class="win__body stack" style="gap: 28px">
     <div class="section-head">
@@ -101,10 +85,10 @@
         <span class="eyebrow">{{ partial "sparkle.html" (dict "size" 12 "class" "is-red") }} a quick peek at my portfolio</span>
         <h2 id="featured-title" class="funky h2">{{ $peek.Title }}</h2>
       </div>
-      <p>{{ with $peek.Params.course }}{{ . | lower }}. {{ end }}{{ $peek.Params.summary | default $peek.Summary | plainify | htmlUnescape }}</p>
+      <p>{{ $peek.Params.summary | default ($peek.Params.course | lower) }}</p>
     </div>
-    <div class="grid">
-      {{- range $projects.ByWeight }}{{ partial "card.html" . }}{{ end }}
+    <div class="grid grid--2">
+      {{- range $projects }}{{ partial "card.html" . }}{{ end }}
     </div>
     <div><a class="link-arrow" href="{{ $peek.RelPermalink }}">see all {{ len $peek.RegularPagesRecursive }} case studies <span aria-hidden="true">→</span></a></div>
   </div>

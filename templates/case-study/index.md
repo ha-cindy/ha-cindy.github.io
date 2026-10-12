@@ -8,7 +8,7 @@ title: "Your case study title"
 weight: 6
 # Shown as "assignment 6". Delete this line if it isn't an assignment.
 assignment: 6
-# true = shows on the home page quick peek (keep it to 3)
+# true = shows on the home page quick peek (the home page shows the first 2)
 featured: false
 # One short line for the card
 summary: "what this project is, in one short line."

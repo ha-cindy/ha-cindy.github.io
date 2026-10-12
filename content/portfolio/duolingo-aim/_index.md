@@ -1,8 +1,8 @@
 ---
-title: "duolingo aim"
-linkTitle: "Duolingo AIM"
+title: "duolingo"
+linkTitle: "Duolingo"
 weight: 1
-description: "Five assignments from AI in Marketing at Rutgers Business School, all built around Duolingo."
-summary: "one brand, one semester: five assignments taking duolingo from research to positioning, content, a campaign, and a lifecycle plan."
+description: "Assignments from AI in Marketing at Rutgers Business School, all built around Duolingo."
+summary: "ai in marketing · rutgers msmai · fall 2026"
 course: "AI in Marketing · Rutgers MSMAI · Fall 2026"
 ---

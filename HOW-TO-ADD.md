@@ -2,7 +2,7 @@
 
 Everything below works right on github.com, with no installs. After you commit, the site rebuilds itself in about 2 minutes (watch the **Actions** tab for the green check).
 
-## Add a case study to an existing collection (like Duolingo AIM)
+## Add a case study to an existing collection (like Duolingo)
 
 1. Open `content/portfolio/duolingo-aim/` on GitHub.
 2. Click **Add file → Create new file**.
@@ -34,7 +34,7 @@ Make the folder right inside `content/portfolio/`, for example `content/portfoli
 ## Change what the home page shows
 
 - **Which collection gets the "quick peek":** in `config.yml`, change `homePeek: "/portfolio/duolingo-aim"`.
-- **Which cards appear there:** set `featured: true` on up to 3 case studies.
+- **Which cards appear there:** set `featured: true` on 2 case studies.
 - **Status panel text (location, studying, seeking):** in `config.yml` under `params`.
 - **Education and experience in "about me":** `data/cv.yaml`.
 
@@ -43,20 +43,14 @@ Make the folder right inside `content/portfolio/`, for example `content/portfoli
 - **The PDF:** upload the new file to `static/` and name it `cv.pdf` (replace the old one).
 - **The interactive CV page:** edit `data/cv.yaml`. Each job is one entry. Use `kind: education`, `research`, or `industry`, which controls the filter buttons.
 
-## Add art
+## Add a milestone to your about page
 
-1. Upload the image to `assets/art/`.
-2. In `content/art.md`, add three lines under `pieces:`:
+In `content/about.md`, add two lines under `milestones:` (newest first):
 
 ```yaml
-  - src: "art/your-file.jpg"
-    title: "Title"
-    medium: "drawing"
+  - when: "Dec 2026"
+    text: "What happened, in one line."
 ```
-
-## Research news
-
-Edit `content/research/_index.md`. Each line is one update.
 
 ## Google Analytics events
 

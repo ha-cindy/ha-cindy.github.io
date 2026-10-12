@@ -1,6 +1,6 @@
 {{ define "main" }}
 <section class="win">
-  <div class="win__bar win__bar--dark"><span class="win__title">ERROR://404</span><div class="win__ctrls"><span class="win__btn is-red" aria-hidden="true"></span></div></div>
+  <div class="win__bar win__bar--dark"><span class="win__title">ERROR://404</span>{{ partial "dots.html" (dict) }}</div>
   <div class="win__body scan notfound">
     <span class="eyebrow">{{ partial "sparkle.html" (dict "size" 12 "class" "is-red") }} file not found</span>
     <h1 class="funky h1 chrome-text">404</h1>

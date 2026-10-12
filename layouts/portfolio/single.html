@@ -14,7 +14,7 @@
   <header class="win">
     <div class="win__bar chrome-bar">
       <span class="win__title">{{ $label }}_0{{ $n }}.case</span>
-      <div class="win__ctrls"><span class="win__btn" aria-hidden="true"></span><span class="win__btn is-red" aria-hidden="true"></span></div>
+      {{ partial "dots.html" (dict) }}
     </div>
     <div class="win__body scan case-head">
       <div class="case-head__main">

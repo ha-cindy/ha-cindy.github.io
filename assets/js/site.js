@@ -65,38 +65,146 @@
     setInterval(tick, 20000);
   }
 
-  /* ---------- sparkle trail ---------- */
-  var sparkleBtn = document.querySelector('[data-sparkle-toggle]');
-  var sparklesOn = store('sparkles') !== 'off' && !reduceMotion && finePointer;
-  var STAR = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1 L13.6 10.4 L23 12 L13.6 13.6 L12 23 L10.4 13.6 L1 12 L10.4 10.4 Z"></path></svg>';
-  var last = 0;
-  function setSparkles(on) {
-    sparklesOn = on;
-    store('sparkles', on ? 'on' : 'off');
-    if (sparkleBtn) { sparkleBtn.textContent = '✦ sparkles: ' + (on ? 'on' : 'off'); sparkleBtn.setAttribute('aria-pressed', String(on)); }
-  }
-  if (sparkleBtn) {
-    if (reduceMotion || !finePointer) sparkleBtn.hidden = true;
-    else { setSparkles(sparklesOn); sparkleBtn.addEventListener('click', function () { setSparkles(!sparklesOn); }); }
-  }
-  document.addEventListener('pointermove', function (e) {
-    if (!sparklesOn || e.pointerType !== 'mouse') return;
-    var now = performance.now();
-    if (now - last < 55) return;
-    last = now;
-    var s = document.createElement('span');
-    s.className = 'trail' + (Math.random() < 0.18 ? ' is-red' : '');
-    s.innerHTML = STAR;
-    s.style.left = e.clientX + 'px';
-    s.style.top = e.clientY + 'px';
-    s.style.setProperty('--dx', (Math.random() * 24 - 12).toFixed(1) + 'px');
-    var size = 7 + Math.random() * 8;
-    s.style.width = s.style.height = size + 'px';
-    document.body.appendChild(s);
-    setTimeout(function () { s.remove(); }, 820);
-  }, { passive: true });
+  /* ---------- zuzu: a little cat that follows the cursor (desktop) or roams (touch) ---------- */
+  var zuzuBtn = document.querySelector('[data-zuzu-toggle]');
+  var zuzuOn = store('zuzu') !== 'off' && !reduceMotion;
+  var CAT_WALK = '<svg class="zuzu__walk" viewBox="0 0 48 36" aria-hidden="true">' +
+    '<path class="zuzu__tail" d="M10 19 C3 17 1 10 5 4" fill="none" stroke-width="4" stroke-linecap="round"/>' +
+    '<g class="zuzu__legs zuzu__legs--a"><rect class="fur" x="13" y="22" width="3.6" height="11" rx="1.8"/><rect class="fur" x="31" y="22" width="3.6" height="11" rx="1.8"/></g>' +
+    '<g class="zuzu__legs zuzu__legs--b"><rect class="fur" x="17" y="22" width="3.6" height="11" rx="1.8"/><rect class="fur" x="35" y="22" width="3.6" height="11" rx="1.8"/></g>' +
+    '<ellipse class="fur" cx="24" cy="20" rx="15" ry="8"/>' +
+    '<path class="patch" d="M12 15 C15 11 24 11 28 13 C25 17 17 18 12 15 Z"/>' +
+    '<circle class="fur" cx="38.5" cy="12.5" r="7"/>' +
+    '<path class="patch" d="M33 9 L34 1.5 L38.5 6.5 Z"/><path class="patch" d="M39.5 6.2 L43.8 1.6 L44.6 9.4 Z"/>' +
+    '<path class="patch" d="M32.2 10.5 C33 6.4 36.6 5.5 39 6.4 C38 9 35 11 32.2 10.5 Z"/>' +
+    '<path class="zuzu__scarf" d="M32.6 17.2 Q37.4 21.4 42.4 17.8 L42.6 20 Q37.2 23.6 32.4 19.4 Z"/>' +
+    '<path class="zuzu__scarf zuzu__scarf-tail" d="M34.4 19.6 L31.6 26.4 L34.6 25.8 L36.6 20.6 Z"/>' +
+    '<circle class="zuzu__eye" cx="41.2" cy="11.6" r="1.1"/><circle class="zuzu__nose" cx="45.2" cy="13.8" r="0.8"/>' +
+    '</svg>';
+  var CAT_SIT = '<svg class="zuzu__sit" viewBox="0 0 48 36" aria-hidden="true">' +
+    '<path class="zuzu__tail" d="M33 33 C43 33 44 26 39.5 23.5" fill="none" stroke-width="4" stroke-linecap="round"/>' +
+    '<path class="fur" d="M14 34 C12 24 16 16 24 16 C32 16 36 24 34 34 Z"/>' +
+    '<path class="patch" d="M27 18 C32 19 34.6 25 34 31 C31 29 28.4 23 27 18 Z"/>' +
+    '<circle class="fur" cx="24" cy="11" r="7"/>' +
+    '<path class="patch" d="M18 8 L18.6 0.8 L23 5.4 Z"/><path class="patch" d="M25 5.4 L29.4 0.8 L30 8 Z"/>' +
+    '<path class="patch" d="M24 4 C27.6 4 30.4 6.4 30.8 9.6 C28.4 9.4 25.6 7.6 24 4 Z"/>' +
+    '<path class="zuzu__scarf" d="M18.8 16 Q24 19.6 29.2 16 L29.6 18.4 Q24 22.4 18.4 18.4 Z"/>' +
+    '<path class="zuzu__scarf zuzu__scarf-tail" d="M26.4 19.6 L28.6 26.6 L25.6 26.2 L24.4 20.4 Z"/>' +
+    '<circle class="zuzu__eye" cx="21.3" cy="10.4" r="1.05"/><circle class="zuzu__eye" cx="26.7" cy="10.4" r="1.05"/>' +
+    '<circle class="zuzu__nose" cx="24" cy="12.6" r="0.8"/>' +
+    '<rect class="fur" x="18.5" y="30" width="4" height="4" rx="2"/><rect class="fur" x="25.5" y="30" width="4" height="4" rx="2"/>' +
+    '</svg><span class="zuzu__z" aria-hidden="true">z</span>';
+  var cat = null, raf = 0, cx = -80, cy = 0, tx = -80, ty = 0, lastMove = 0, roamTimer = 0, mode = finePointer ? 'follow' : 'roam';
 
-  /* ---------- chip filters (portfolio, cv, art) ---------- */
+  function setState(st) { if (cat && cat.dataset.state !== st) cat.dataset.state = st; }
+  function place() { cat.style.transform = 'translate(' + Math.round(cx - 24) + 'px,' + Math.round(cy - 30) + 'px)'; }
+  function face(dx) { if (Math.abs(dx) > 0.5) cat.classList.toggle('is-left', dx < 0); }
+
+  function followLoop() {
+    var dx = tx - cx, dy = ty - cy, d = Math.hypot(dx, dy);
+    if (d > 46) {
+      var sp = Math.min(7.5, 2.8 + d / 55);
+      cx += dx / d * sp; cy += dy / d * sp; face(dx); setState('walk');
+    } else {
+      setState(performance.now() - lastMove > 7000 ? 'sleep' : 'sit');
+    }
+    place();
+    raf = requestAnimationFrame(followLoop);
+  }
+  function onMove(e) {
+    if (e.pointerType && e.pointerType !== 'mouse') return;
+    tx = e.clientX + 30; ty = e.clientY + 34; lastMove = performance.now();
+    if (cx < -40) { cx = tx - 120; cy = ty; }
+  }
+  function roamOnce() {
+    if (!zuzuOn) return;
+    var w = window.innerWidth, h = window.innerHeight;
+    var fromLeft = Math.random() < 0.5, stopAt = w * (0.3 + Math.random() * 0.4);
+    cx = fromLeft ? -40 : w + 40; cy = h - 14 - (parseFloat(getComputedStyle(document.documentElement).getPropertyValue('padding-bottom')) || 0);
+    var dir = fromLeft ? 1 : -1, paused = false, t0 = 0;
+    cat.classList.toggle('is-left', !fromLeft);
+    function step(ts) {
+      if (!zuzuOn) return;
+      if (!paused && ((dir > 0 && cx >= stopAt) || (dir < 0 && cx <= stopAt))) { paused = true; t0 = ts; setState('sit'); }
+      if (paused && ts - t0 > 2600) { paused = false; stopAt = dir > 0 ? w + 60 : -60; }
+      if (!paused) { cx += dir * 2.8; setState('walk'); }
+      place();
+      if ((dir > 0 && cx > w + 50) || (dir < 0 && cx < -50)) { roamTimer = setTimeout(roamOnce, 22000 + Math.random() * 16000); return; }
+      raf = requestAnimationFrame(step);
+    }
+    raf = requestAnimationFrame(step);
+  }
+  function startZuzu() {
+    if (!cat) {
+      cat = document.createElement('div');
+      cat.className = 'zuzu';
+      cat.setAttribute('aria-hidden', 'true');
+      cat.innerHTML = CAT_WALK + CAT_SIT;
+      document.body.appendChild(cat);
+    }
+    cat.hidden = false;
+    if (mode === 'follow') {
+      document.addEventListener('pointermove', onMove, { passive: true });
+      lastMove = performance.now();
+      raf = requestAnimationFrame(followLoop);
+    } else {
+      roamTimer = setTimeout(roamOnce, 3500);
+    }
+  }
+  function stopZuzu() {
+    cancelAnimationFrame(raf); clearTimeout(roamTimer);
+    document.removeEventListener('pointermove', onMove);
+    if (cat) { cat.hidden = true; cx = -80; }
+  }
+  function setZuzu(on) {
+    zuzuOn = on;
+    store('zuzu', on ? 'on' : 'off');
+    if (zuzuBtn) { zuzuBtn.textContent = 'zuzu the cat: ' + (on ? 'on' : 'off'); zuzuBtn.setAttribute('aria-pressed', String(on)); }
+    if (on) startZuzu(); else stopZuzu();
+  }
+  if (zuzuBtn) {
+    if (reduceMotion) zuzuBtn.hidden = true;
+    else zuzuBtn.addEventListener('click', function () { setZuzu(!zuzuOn); track('zuzu_toggle', { on: !zuzuOn ? 'off' : 'on' }); });
+  }
+  if (!reduceMotion) setZuzu(zuzuOn);
+
+  /* ---------- card spotlight ---------- */
+  if (finePointer && !reduceMotion) {
+    document.addEventListener('pointermove', function (e) {
+      var c = e.target.closest && e.target.closest('.card');
+      if (!c) return;
+      var r = c.getBoundingClientRect();
+      c.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+      c.style.setProperty('--my', (e.clientY - r.top) + 'px');
+    }, { passive: true });
+  }
+
+  /* ---------- touch screens: light up the window in view ---------- */
+  if (!finePointer && 'IntersectionObserver' in window) {
+    var lit = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) { en.target.classList.toggle('is-lit', en.intersectionRatio > 0.55); });
+    }, { threshold: [0, 0.55, 1] });
+    document.querySelectorAll('main .win').forEach(function (w) { lit.observe(w); });
+  }
+
+  /* ---------- entrance motion (below-the-fold only, never hides the first screen) ---------- */
+  if (!reduceMotion && 'IntersectionObserver' in window) {
+    var targets = Array.prototype.slice.call(document.querySelectorAll('main > .win, main > section, .grid > .card, .slides > .slide-btn, .gallery > .gallery__item, .pager'));
+    var vh = window.innerHeight;
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) { en.target.classList.add('is-in'); io.unobserve(en.target); }
+      });
+    }, { rootMargin: '0px 0px -8% 0px' });
+    targets.forEach(function (el, i) {
+      if (el.getBoundingClientRect().top < vh * 0.92) return;
+      el.classList.add('reveal');
+      el.style.transitionDelay = ((i % 3) * 60) + 'ms';
+      io.observe(el);
+    });
+  }
+
+  /* ---------- chip filters (portfolio, cv) ---------- */
   function setupFilter(groupSel, attr, itemSel, itemAttr, eventName, onChange) {
     var group = document.querySelector(groupSel);
     if (!group) return;
@@ -118,14 +226,23 @@
       if (val) track(eventName, { value: val });
     });
   }
+  var moreBtn = document.querySelector('[data-more-chips]');
+  if (moreBtn) {
+    var moreLabel = moreBtn.textContent;
+    moreBtn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      var g = moreBtn.closest('[data-filter]');
+      var open = g.classList.toggle('is-open');
+      moreBtn.setAttribute('aria-expanded', String(open));
+      moreBtn.textContent = open ? '− fewer' : moreLabel;
+    });
+  }
   var countLabel = document.querySelector('[data-count-label]');
   setupFilter('[data-filter]', 'data-filter-tag', '[data-filter-grid] .card', 'data-tags', 'portfolio_filter', function (n) {
     if (countLabel) countLabel.textContent = n + (n === 1 ? ' item' : ' items');
   });
-  setupFilter('[data-tl-filter]', 'data-kind', '.timeline .tl', 'data-kind', 'cv_filter');
-  setupFilter('[data-art-filter]', 'data-medium', '.gallery__item', 'data-medium', 'art_filter');
 
-  /* ---------- lightbox (art + case study slides) ---------- */
+  /* ---------- lightbox (case study slides) ---------- */
   var lb = document.getElementById('lightbox');
   if (lb && typeof lb.showModal === 'function') {
     var lbImg = lb.querySelector('[data-lb-img]');
@@ -193,31 +310,29 @@
 
     var commands = {
       help: function () {
-        print('<b>about</b>      who i am\n<b>portfolio</b>  all case studies\n<b>aim</b>        the duolingo aim collection\n<b>cv</b>         interactive cv\n<b>resume</b>     open the pdf\n<b>research</b>   research news\n<b>art</b>        the gallery\n<b>contact</b>    email + links\n<b>theme</b>      light / dark\n<b>sparkles</b>   cursor trail on / off\n<b>clear</b>      clear the screen\n<b>exit</b>       close terminal');
+        print('<b>about</b>      who i am\n<b>portfolio</b>  all case studies\n<b>duolingo</b>   the duolingo collection\n<b>cv</b>         interactive cv\n<b>resume</b>     open the pdf\n<b>contact</b>    email + links\n<b>theme</b>      light / dark\n<b>zuzu</b>       the cat, on / off\n<b>clear</b>      clear the screen\n<b>exit</b>       close terminal');
       },
       whoami: function () { print(esc(data.tagline || 'cindy ha')); print('seeking: ' + esc(data.seeking || '')); },
       about: function () { go('/about/', 'about'); },
       portfolio: function () { go('/portfolio/', 'portfolio'); },
       projects: function () { go('/portfolio/', 'portfolio'); },
-      aim: function () { go('/portfolio/duolingo-aim/', 'duolingo aim'); },
-      duolingo: function () { go('/portfolio/duolingo-aim/', 'duolingo aim'); },
+      aim: function () { go('/portfolio/duolingo-aim/', 'duolingo'); },
+      duolingo: function () { go('/portfolio/duolingo-aim/', 'duolingo'); },
       cv: function () { go('/cv/', 'cv'); },
       resume: function () { track('cv_download', { location: 'terminal' }); go('/cv.pdf', 'cv.pdf'); },
-      research: function () { go('/research/', 'research'); },
-      art: function () { go('/art/', 'art'); },
       home: function () { go('/', 'home'); },
       contact: function () {
         print('email: <a href="mailto:' + esc(data.email) + '" data-track="contact_click" data-track-method="terminal">' + esc(data.email) + '</a>');
         if (socials) print(socials);
       },
       theme: function () { print('theme: ' + toggleTheme()); },
-      sparkles: function () {
-        if (reduceMotion || !finePointer) { print('sparkles need a mouse and motion turned on.'); return; }
-        setSparkles(!sparklesOn); print('sparkles: ' + (sparklesOn ? 'on ✦' : 'off'));
+      zuzu: function () {
+        if (reduceMotion) { print('zuzu is napping (your device has reduced motion on).'); return; }
+        setZuzu(!zuzuOn); print(zuzuOn ? 'zuzu: meow. (on)' : 'zuzu went to nap. (off)');
       },
       clear: function () { log.innerHTML = ''; },
       exit: function () { term.close(); },
-      ls: function () { print('about/  portfolio/  cv/  research/  art/  cv.pdf'); },
+      ls: function () { print('about/  portfolio/  cv/  cv.pdf'); },
       sudo: function (args) {
         if (/hire/.test(args)) { print('permission granted ✦ opening contact…'); commands.contact(); track('easter_egg', { command: 'sudo hire' }); }
         else print('nice try.');
