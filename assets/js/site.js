@@ -158,6 +158,9 @@
       if (e.key === 'ArrowRight') show(idx + 1);
     });
     lb.addEventListener('click', function (e) { if (e.target === lb) lb.close(); });
+    var openFirst = document.querySelector('[data-open-first]');
+    var first = document.querySelector('[data-first-slide]');
+    if (openFirst && first) openFirst.addEventListener('click', function () { first.click(); });
   }
 
   /* ---------- terminal ---------- */

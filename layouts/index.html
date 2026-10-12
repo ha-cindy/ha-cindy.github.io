@@ -42,13 +42,12 @@
       <div class="status__row">loc: <b>{{ site.Params.location }}</b></div>
       <div class="status__row">studying: <b>{{ site.Params.studying }}</b></div>
       <div class="status__row">seeking: <b>{{ site.Params.seeking }}</b></div>
-      <div class="status__row">local time: <b data-clock>ET</b></div>
       <button type="button" data-sparkle-toggle aria-pressed="true">✦ sparkles: on</button>
     </div>
   </div>
 </section>
 
-<section class="win" aria-labelledby="about-title">
+<section class="win" aria-label="About me">
   <div class="win__bar chrome-bar">
     <span class="win__title">about_me.txt</span>
     <div class="win__ctrls">
@@ -57,37 +56,29 @@
     </div>
   </div>
   <div class="win__body about">
-    <div class="about__intro">
-      <span class="eyebrow">{{ partial "sparkle.html" (dict "size" 12 "class" "is-red") }} about me</span>
-      <h2 id="about-title" class="funky h2">hi, i'm cindy</h2>
-      {{- with site.GetPage "/about" }}<p class="about__bio">{{ .Params.blurb }}</p>{{ end }}
-      <a class="link-arrow" href="{{ "/about/" | relURL }}">more about me <span aria-hidden="true">→</span></a>
+    <div class="about__col">
+      <span class="eyebrow">{{ partial "sparkle.html" (dict "size" 12 "class" "is-red") }} education</span>
+      <ul class="edu">
+        {{- range site.Data.cv.education }}
+        <li>
+          <span class="edu__school">{{ .school }}</span>
+          <span class="edu__deg">{{ .degree }}</span>
+          <span class="edu__when">{{ .when }}</span>
+        </li>
+        {{- end }}
+      </ul>
     </div>
-    <div class="about__cols">
-      <div class="about__col">
-        <span class="eyebrow">education</span>
-        <ul class="edu">
-          {{- range site.Data.cv.education }}
-          <li>
-            <span class="edu__school">{{ .school }}</span>
-            <span class="edu__deg">{{ .degree }}</span>
-            <span class="edu__when">{{ .when }}</span>
-          </li>
-          {{- end }}
-        </ul>
-      </div>
-      <div class="about__col">
-        <span class="eyebrow">experience</span>
-        <ul class="edu">
-          {{- range first 2 (where site.Data.cv.entries "kind" "in" (slice "research" "industry")) }}
-          <li>
-            <span class="edu__school">{{ .org | lower }}</span>
-            <span class="edu__deg">{{ .title | lower }}</span>
-            <span class="edu__when">{{ .when | lower }}</span>
-          </li>
-          {{- end }}
-        </ul>
-      </div>
+    <div class="about__col">
+      <span class="eyebrow">{{ partial "sparkle.html" (dict "size" 12 "class" "is-red") }} experience</span>
+      <ul class="edu">
+        {{- range first 2 (where site.Data.cv.entries "kind" "in" (slice "research" "industry")) }}
+        <li>
+          <span class="edu__school">{{ .org | lower }}</span>
+          <span class="edu__deg">{{ .title | lower }}</span>
+          <span class="edu__when">{{ .when | lower }}</span>
+        </li>
+        {{- end }}
+      </ul>
     </div>
   </div>
 </section>
@@ -119,54 +110,5 @@
   </div>
 </section>
 
-<section class="two-up">
-  <div class="win">
-    <div class="win__bar chrome-bar">
-      <span class="win__title">C:\art\</span>
-      <div class="win__ctrls"><button class="win__btn" type="button" data-min aria-label="Minimize window" aria-expanded="true"></button></div>
-    </div>
-    <div class="win__body stack" style="gap: 20px">
-      <div class="section-head" style="border: 0; padding: 0">
-        <div>
-          <span class="eyebrow">off the clock</span>
-          <h2 class="funky" style="font-size: clamp(32px, 5vw, 44px)">art</h2>
-        </div>
-      </div>
-      {{- with site.GetPage "/art" }}
-      <div class="mini-gallery">
-        {{- range first 3 .Params.pieces }}
-          {{- with resources.Get .src }}
-          {{- $t := .Fill "320x320 webp q75 Center" }}
-          <a href="{{ "/art/" | relURL }}"><img src="{{ $t.RelPermalink }}" width="160" height="160" alt="" loading="lazy"></a>
-          {{- end }}
-        {{- end }}
-      </div>
-      {{- end }}
-      <a class="link-arrow" href="{{ "/art/" | relURL }}">open the gallery <span aria-hidden="true">→</span></a>
-    </div>
-  </div>
-  <div class="win">
-    <div class="win__bar chrome-bar">
-      <span class="win__title">cv.exe</span>
-      <div class="win__ctrls"><button class="win__btn" type="button" data-min aria-label="Minimize window" aria-expanded="true"></button></div>
-    </div>
-    <div class="win__body stack" style="gap: 20px">
-      <div class="section-head" style="border: 0; padding: 0">
-        <div>
-          <span class="eyebrow">quick read</span>
-          <h2 class="funky" style="font-size: clamp(32px, 5vw, 44px)">cv</h2>
-        </div>
-      </div>
-      <p class="muted" style="font-size: 15px">an interactive timeline of my education, research, and industry work, plus the pdf.</p>
-      <div class="chips">
-        {{- range first 6 (index site.Data.cv.skills 0).items }}<span class="chip">{{ . }}</span>{{ end }}
-        {{- range first 3 (index site.Data.cv.skills 1).items }}<span class="chip">{{ . }}</span>{{ end }}
-      </div>
-      <div class="btns">
-        <a class="btn btn--chrome" href="{{ "/cv/" | relURL }}">interactive cv</a>
-        <a class="btn btn--primary" href="{{ "cv.pdf" | relURL }}" target="_blank" rel="noopener" data-track="cv_download" data-track-location="home">download pdf</a>
-      </div>
-    </div>
-  </div>
-</section>
+
 {{ end }}

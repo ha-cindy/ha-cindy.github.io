@@ -11,12 +11,12 @@ Everything below works right on github.com, with no installs. After you commit, 
 5. Click **Commit changes**.
 6. Optional images: open your new folder, click **Add file → Upload files**, and drag in:
    - `cover.jpg`: the card image (a cover slide works great)
-   - `slide-1.jpg`, `slide-2.jpg`, …: key slides, listed under `slides:` in the file
-   - `deck.pdf`: adds a "view the full deck" button
+   - `deck.pdf`: adds an "open pdf" button
+7. Optional clickable slides: upload slide images into a `slides` folder inside your project folder, named `01.jpg`, `02.jpg`, `03.jpg`, … (type `slides/01.jpg` as the file name when uploading the first one, then upload the rest into that folder). They show as a clickable grid automatically.
 
 The filter buttons, card, case study page, and next/previous links all appear on their own.
 
-**Tip:** to turn a PDF deck into images, open it on a Mac in Preview, choose **File → Export**, and pick JPEG.
+**Tip:** to turn a PDF deck into images on a Mac, open it in Preview, select all pages in the sidebar, then **File → Export** and choose JPEG. Or just ask Claude to do it.
 
 ## Start a new collection (a new class, job, or project series)
 

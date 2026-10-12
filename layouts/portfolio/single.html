@@ -2,6 +2,8 @@
 {{- $n := .Params.assignment | default .Weight }}
 {{- $col := .Parent }}
 {{- $deck := .Resources.GetMatch "deck.pdf" }}
+{{- $slides := sort (.Resources.Match "slides/*") "Name" }}
+{{- $label := "" }}{{ with $col }}{{ $label = .Params.linkTitle | default .Title | lower | replaceRE "[^a-z0-9]+" "_" }}{{ end }}
 <article class="stack" data-case-study="{{ .Title }}">
   <nav class="crumbs" aria-label="Breadcrumb">
     <a href="{{ "/portfolio/" | relURL }}">portfolio</a><span>/</span>
@@ -11,77 +13,55 @@
 
   <header class="win">
     <div class="win__bar chrome-bar">
-      <span class="win__title">{{ with $col }}{{ .Params.linkTitle | default .Title | lower | replaceRE "[^a-z0-9]+" "_" }}{{ end }}_0{{ $n }}.case</span>
+      <span class="win__title">{{ $label }}_0{{ $n }}.case</span>
       <div class="win__ctrls"><span class="win__btn" aria-hidden="true"></span><span class="win__btn is-red" aria-hidden="true"></span></div>
     </div>
-    <div class="win__body scan stack" style="gap: 20px">
-      <span class="eyebrow">{{ partial "sparkle.html" (dict "size" 12 "class" "is-red") }} {{ with $col }}{{ .Params.linkTitle | default .Title }}{{ end }} · assignment {{ $n }}</span>
-      <h1 class="funky" style="font-size: clamp(40px, 7vw, 72px)">{{ .Title }}</h1>
-      {{ with .Params.question }}<p class="lede"><span class="mono muted" style="font-size: 13px">Q:</span> {{ . }}</p>{{ end }}
-      {{- with .Resources.GetMatch "cover.*" }}
-        {{- $big := .Resize "1400x webp q82" }}
-        <button class="slide-btn" type="button" data-lightbox-src="{{ $big.RelPermalink }}" data-lightbox-cap="cover slide" aria-label="Enlarge cover slide">
-          <img src="{{ $big.RelPermalink }}" width="{{ $big.Width }}" height="{{ $big.Height }}" alt="Cover slide of the deck">
-        </button>
-      {{- end }}
+    <div class="win__body scan case-head">
+      <div class="case-head__main">
+        <span class="eyebrow">{{ partial "sparkle.html" (dict "size" 12 "class" "is-red") }} {{ with $col }}{{ .Params.linkTitle | default .Title }}{{ end }} · assignment {{ $n }}{{ with .Params.deliverable }} · {{ . }}{{ end }}</span>
+        <h1 class="funky" style="font-size: clamp(38px, 6.5vw, 68px)">{{ .Title }}</h1>
+        {{- with .Params.bullets }}
+        <ul class="bullets">{{ range . }}<li>{{ . | markdownify }}</li>{{ end }}</ul>
+        {{- end }}
+        {{- with .Content }}<div class="prose">{{ . }}</div>{{ end }}
+      </div>
+      <div class="case-head__meta">
+        <div class="chips">
+          {{- range .Params.skills }}<span class="chip">{{ . }}</span>{{ end }}
+          {{- range .Params.tools }}<span class="chip chip--ghost">{{ . }}</span>{{ end }}
+        </div>
+        <div class="btns">
+          {{- with $slides }}<button class="btn btn--chrome" type="button" data-open-first>view slides ({{ len . }})</button>{{ end }}
+          {{- with $deck }}<a class="btn btn--primary" href="{{ .RelPermalink }}" target="_blank" rel="noopener" data-track="deck_open" data-track-title="{{ $.Title }}">open pdf ↗</a>{{ end }}
+        </div>
+      </div>
     </div>
   </header>
 
-  <div class="case">
-    <div class="case__main stack">
-      <div class="win">
-        <div class="win__bar chrome-bar"><span class="win__title">case_study.md</span></div>
-        <div class="win__body"><div class="prose">{{ .Content }}</div></div>
+  {{- with $slides }}
+  <section class="win" aria-label="Slides">
+    <div class="win__bar win__bar--dark"><span class="win__title">slides\</span><span class="win__meta">{{ len . }} slides · click to enlarge</span></div>
+    <div class="win__body">
+      <div class="slides">
+        {{- range $i, $s := . }}
+          {{- $big := $s.Resize "1600x webp q82" }}
+          {{- $sm := $s.Resize "520x webp q74" }}
+          <button class="slide-btn" type="button" data-lightbox-src="{{ $big.RelPermalink }}" data-lightbox-cap="slide {{ add $i 1 }} of {{ len $slides }}" aria-label="Enlarge slide {{ add $i 1 }}" {{ if eq $i 0 }}data-first-slide{{ end }}>
+            <img src="{{ $sm.RelPermalink }}" width="{{ $sm.Width }}" height="{{ $sm.Height }}" alt="Slide {{ add $i 1 }} of {{ $.Title }}" loading="{{ if lt $i 6 }}eager{{ else }}lazy{{ end }}" decoding="async">
+            <span class="slide-btn__num">{{ printf "%02d" (add $i 1) }}</span>
+          </button>
+        {{- end }}
       </div>
-
-      {{- with .Params.slides }}
-      <div class="win">
-        <div class="win__bar win__bar--dark"><span class="win__title">key_slides\</span><span class="win__meta">click to enlarge</span></div>
-        <div class="win__body">
-          <div class="slides">
-            {{- range . }}
-              {{- $cap := .caption }}
-              {{- with $.Resources.GetMatch .src }}
-                {{- $big := .Resize "1400x webp q82" }}
-                {{- $sm := .Resize "720x webp q78" }}
-                <figure>
-                  <button class="slide-btn" type="button" data-lightbox-src="{{ $big.RelPermalink }}" data-lightbox-cap="{{ $cap }}" aria-label="Enlarge slide: {{ $cap }}">
-                    <img src="{{ $sm.RelPermalink }}" width="{{ $sm.Width }}" height="{{ $sm.Height }}" alt="Slide: {{ $cap }}" loading="lazy" decoding="async">
-                  </button>
-                  <figcaption>{{ $cap }}</figcaption>
-                </figure>
-              {{- end }}
-            {{- end }}
-          </div>
-        </div>
-      </div>
-      {{- end }}
     </div>
-
-    <aside class="case__side">
-      <div class="win win--sm">
-        <div class="win__bar chrome-bar"><span class="win__title">properties</span></div>
-        <div class="win__body" style="padding: 20px">
-          <ul class="meta-list">
-            {{ with $col }}{{ with .Params.course }}<li><span>course</span>{{ . }}</li>{{ end }}{{ end }}
-            {{ with .Params.deliverable }}<li><span>deliverable</span>{{ . }}</li>{{ end }}
-            {{ with .Params.skills }}<li><span>skills</span><div class="chips">{{ range . }}<span class="chip">{{ . }}</span>{{ end }}</div></li>{{ end }}
-            {{ with .Params.tools }}<li><span>tools</span><div class="chips">{{ range . }}<span class="chip">{{ . }}</span>{{ end }}</div></li>{{ end }}
-          </ul>
-        </div>
-      </div>
-      {{- with $deck }}
-      <a class="btn btn--primary" href="{{ .RelPermalink }}" target="_blank" rel="noopener" data-track="deck_open" data-track-title="{{ $.Title }}">view the full deck (pdf) ↗</a>
-      {{- end }}
-    </aside>
-  </div>
+  </section>
+  {{- end }}
 
   {{- with $col }}
   {{- $sib := .RegularPages.ByWeight }}
-  {{- $prev := $sib.Prev $ }}{{ $next := $sib.Next $ }}
+  {{- $prev := $sib.Next $ }}{{ $next := $sib.Prev $ }}
   <nav class="pager" aria-label="More case studies">
-    {{- with $next }}<a href="{{ .RelPermalink }}"><small>← previous</small><span class="h3" style="font-size: 20px">{{ .Title }}</span></a>{{ end }}
-    {{- with $prev }}<a href="{{ .RelPermalink }}"><small>next →</small><span class="h3" style="font-size: 20px">{{ .Title }}</span></a>{{ end }}
+    {{- with $prev }}<a href="{{ .RelPermalink }}"><small>← previous</small><span class="h3" style="font-size: 20px">{{ .Title }}</span></a>{{ end }}
+    {{- with $next }}<a href="{{ .RelPermalink }}"><small>next →</small><span class="h3" style="font-size: 20px">{{ .Title }}</span></a>{{ end }}
   </nav>
   {{- end }}
 </article>
