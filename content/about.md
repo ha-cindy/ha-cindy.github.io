@@ -2,6 +2,12 @@
 title: "about"
 url: "/about/"
 layout: "about"
+# Fun facts: "key" is the code-style label, "value" is text or a list.
+fun_facts:
+  - key: "favoriteCookie"
+    value: "chocolate chip, hold the chocolate chips"
+  - key: "catNames"
+    value: ["Zuzu", "Juju", "20 Piece Chicken Nugget with Honey and Barbeque Sauce"]
 # Newest first. Add a line here whenever something happens.
 milestones:
   - when: "Fall 2026"

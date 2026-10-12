@@ -611,3 +611,17 @@ body::after {
 /* home quick peek: two cards share the row */
 .grid--2 { grid-template-columns: repeat(auto-fit, minmax(min(100%, 360px), 1fr)); }
 .grid--2 .card__thumb { height: 220px; }
+
+/* about: fun facts as a code object */
+.code-card { font-family: var(--f-mono); font-size: 14.5px; line-height: 1.75; background: var(--surface-2); border: 1px solid var(--hair); border-radius: var(--r-card); padding: 18px 20px; display: grid; grid-template-columns: max-content minmax(0, 1fr); column-gap: 12px; overflow-wrap: anywhere; }
+.code-card__line { grid-column: 1 / -1; color: var(--muted); }
+.code-card__row { display: contents; }
+.code-card .k { padding-left: 22px; color: var(--ink); white-space: nowrap; }
+.code-card .v { color: var(--muted); }
+.code-card .str { color: var(--ink-2); }
+.code-card .kw { color: var(--red); }
+.code-card .var { color: var(--ink); }
+@media (max-width: 560px) {
+  .code-card { grid-template-columns: minmax(0, 1fr); font-size: 13px; }
+  .code-card .v { padding-left: 22px; margin-bottom: 6px; }
+}

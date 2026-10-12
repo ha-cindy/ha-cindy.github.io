@@ -11,6 +11,37 @@
   </div>
 </article>
 
+{{- with .Params.fun_facts }}
+<section class="win" aria-label="Fun facts">
+  <div class="win__bar chrome-bar">
+    <span class="win__title">fun_facts.js</span>
+    <div class="win__ctrls"><span class="win__btn" aria-hidden="true"></span><span class="win__btn is-red" aria-hidden="true"></span></div>
+  </div>
+  <div class="win__body stack" style="gap: 24px">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">{{ partial "sparkle.html" (dict "size" 12 "class" "is-red") }} node fun_facts.js</span>
+        <h2 class="funky h2">fun facts</h2>
+      </div>
+    </div>
+    <div class="code-card" role="list">
+      <div class="code-card__line"><span class="kw">const</span> <span class="var">funFacts</span> = {</div>
+      {{- range . }}
+      <div class="code-card__row" role="listitem">
+        <span class="k">{{ .key }}:</span>
+        {{- if reflect.IsSlice .value }}
+        <span class="v">[{{ range $i, $v := .value }}{{ if $i }}, {{ end }}<span class="str">"{{ $v }}"</span>{{ end }}],</span>
+        {{- else }}
+        <span class="v"><span class="str">"{{ .value }}"</span>,</span>
+        {{- end }}
+      </div>
+      {{- end }}
+      <div class="code-card__line">};</div>
+    </div>
+  </div>
+</section>
+{{- end }}
+
 {{- with .Params.milestones }}
 <section class="win" aria-label="Milestones">
   <div class="win__bar chrome-bar">
