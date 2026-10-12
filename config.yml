@@ -30,7 +30,7 @@ menu:
 params:
     description: "Obsessed with spreadsheets and people-watching. Data anlayst & researcher blending behavioral science with data."
     author: Cindy Ha
-    # googleAnalyticsID: "G-XXXXX"
+    googleAnalyticsID: "G-XLPXPQYZ4Q"
     DateFormat: "January 2006"
     defaultTheme: light
     hideFooter: true
