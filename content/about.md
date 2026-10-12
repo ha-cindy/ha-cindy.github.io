@@ -22,7 +22,7 @@ blurb: "i'm a master's student in marketing analytics and insights at rutgers bu
 
 - M.S. in Marketing Analytics and Insights at Rutgers Business School (expected May 2027).
 - B.A. in Data Science and Psychology from Northwestern University, finished in 3 years (2024).
-- Lab manager at Princeton University (2024–2026) with [Dr. Anuj Shah](https://anujkshah.com) and [Dr. Betsy Levy Paluck](http://www.betsylevypaluck.com/), building NLP pipelines in Python and running network analysis on data from 500+ business owners.
+- Lab manager at Princeton University, conducting social and behavioral psychology research.
 - Interested in how people make decisions, and in using data to understand why.
 - Looking for marketing insights or consumer insights roles.
 
