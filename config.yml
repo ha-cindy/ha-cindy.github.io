@@ -25,7 +25,7 @@ params:
     googleAnalyticsID: "G-XLPXPQYZ4Q"
     email: "hacindy02@gmail.com"
     location: "Rutgers Business School"
-    studying: "m.s. marketing analytics & insights ('27)"
+    studying: "m.s. marketing analytics & insights"
     seeking: "marketing/consumer insights roles"
     # which portfolio collection gets the "quick peek" on the home page
     homePeek: "/portfolio/duolingo-aim"
