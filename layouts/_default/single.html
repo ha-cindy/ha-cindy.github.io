@@ -2,7 +2,7 @@
 <article class="win">
   <div class="win__bar chrome-bar">
     <span class="win__title">SYS://{{ .File.ContentBaseName | default (.Title | urlize) }}</span>
-    <div class="win__ctrls"><span class="win__btn" aria-hidden="true"></span><span class="win__btn is-red" aria-hidden="true"></span></div>
+    {{ partial "dots.html" (dict) }}
   </div>
   <div class="win__body scan stack" style="gap: 24px">
     {{ with .Title }}<h1 class="funky h2">{{ . }}</h1>{{ end }}

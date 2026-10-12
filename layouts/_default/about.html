@@ -2,7 +2,7 @@
 <article class="win">
   <div class="win__bar chrome-bar">
     <span class="win__title">about_me.md</span>
-    <div class="win__ctrls"><span class="win__btn" aria-hidden="true"></span><span class="win__btn is-red" aria-hidden="true"></span></div>
+    {{ partial "dots.html" (dict) }}
   </div>
   <div class="win__body stack" style="gap: 24px">
     <span class="eyebrow">{{ partial "sparkle.html" (dict "size" 12 "class" "is-red") }} cat about_me.md</span>
@@ -15,7 +15,7 @@
 <section class="win" aria-label="Fun facts">
   <div class="win__bar chrome-bar">
     <span class="win__title">fun_facts.js</span>
-    <div class="win__ctrls"><span class="win__btn" aria-hidden="true"></span><span class="win__btn is-red" aria-hidden="true"></span></div>
+    {{ partial "dots.html" (dict) }}
   </div>
   <div class="win__body stack" style="gap: 24px">
     <div class="section-head">
@@ -46,7 +46,7 @@
 <section class="win" aria-label="Milestones">
   <div class="win__bar chrome-bar">
     <span class="win__title">changelog.md</span>
-    <div class="win__ctrls"><span class="win__meta">{{ len . }} entries</span></div>
+    {{ partial "dots.html" (dict "meta" (printf "%d entries" (len .))) }}
   </div>
   <div class="win__body stack" style="gap: 24px">
     <div class="section-head">

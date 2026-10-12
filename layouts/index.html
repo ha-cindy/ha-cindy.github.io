@@ -2,11 +2,7 @@
 <section class="win hero" aria-label="Introduction">
   <div class="win__bar chrome-bar">
     <span class="win__title">sys://hello_world</span>
-    <div class="win__ctrls">
-      <button class="win__btn" type="button" data-min aria-label="Minimize window" aria-expanded="true"></button>
-      <span class="win__btn" aria-hidden="true"></span>
-      <span class="win__btn is-red" aria-hidden="true"></span>
-    </div>
+    {{ partial "dots.html" (dict "min" true) }}
   </div>
   <div class="win__body hero__body">
     <div class="hero__text">
@@ -44,10 +40,7 @@
 <section class="win" aria-label="About me">
   <div class="win__bar chrome-bar">
     <span class="win__title">about_me.txt</span>
-    <div class="win__ctrls">
-      <button class="win__btn" type="button" data-min aria-label="Minimize window" aria-expanded="true"></button>
-      <span class="win__btn is-red" aria-hidden="true"></span>
-    </div>
+    {{ partial "dots.html" (dict "min" true) }}
   </div>
   <div class="win__body about">
     <div class="about__col">
@@ -84,10 +77,7 @@
 <section class="win" aria-labelledby="featured-title">
   <div class="win__bar win__bar--dark">
     <span class="win__title">C:\portfolio\{{ $peek.Params.linkTitle | default $peek.Title | lower | replaceRE "[^a-z0-9]+" "_" }}\</span>
-    <div class="win__ctrls">
-      <span class="win__meta">{{ len $projects }} of {{ len $peek.RegularPagesRecursive }} items</span>
-      <button class="win__btn" type="button" data-min aria-label="Minimize window" aria-expanded="true"></button>
-    </div>
+    {{ partial "dots.html" (dict "min" true "meta" (printf "%d of %d items" (len $projects) (len $peek.RegularPagesRecursive))) }}
   </div>
   <div class="win__body stack" style="gap: 28px">
     <div class="section-head">

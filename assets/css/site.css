@@ -660,3 +660,7 @@ body::after {
 .changelog li.is-current .changelog__when { color: var(--red); }
 .changelog__text { font-size: 15.5px; line-height: 1.5; color: var(--ink-2); }
 @media (max-width: 480px) { .changelog li { grid-template-columns: minmax(0, 1fr); gap: 2px; } }
+
+/* three window dots */
+.win__ctrls { gap: 12px; }
+.win__dots { display: inline-flex; gap: 7px; align-items: center; }

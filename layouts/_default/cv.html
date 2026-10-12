@@ -3,7 +3,7 @@
 <article class="win cv">
   <div class="win__bar chrome-bar">
     <span class="win__title">cv.md</span>
-    <div class="win__ctrls"><span class="win__meta">updated {{ $cv.updated | lower }}</span></div>
+    {{ partial "dots.html" (dict "meta" (printf "updated %s" ($cv.updated | lower))) }}
   </div>
   <div class="win__body stack" style="gap: 36px">
     <header class="section-head">
