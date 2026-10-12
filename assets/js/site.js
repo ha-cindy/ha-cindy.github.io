@@ -69,23 +69,30 @@
   var zuzuBtn = document.querySelector('[data-zuzu-toggle]');
   var zuzuOn = store('zuzu') !== 'off' && !reduceMotion;
   var CAT_WALK = '<svg class="zuzu__walk" viewBox="0 0 48 36" aria-hidden="true">' +
-    '<path class="zuzu__tail" d="M10 19 C4 17 2 11 5 5" fill="none" stroke-width="3.2" stroke-linecap="round"/>' +
-    '<g class="zuzu__legs zuzu__legs--a"><rect x="13" y="22" width="3.4" height="11" rx="1.7"/><rect x="31" y="22" width="3.4" height="11" rx="1.7"/></g>' +
-    '<g class="zuzu__legs zuzu__legs--b"><rect x="17" y="22" width="3.4" height="11" rx="1.7"/><rect x="35" y="22" width="3.4" height="11" rx="1.7"/></g>' +
-    '<ellipse cx="24" cy="20" rx="15" ry="8"/>' +
-    '<circle cx="38.5" cy="12.5" r="7"/>' +
-    '<path d="M33 9 L34 1.5 L38.5 6.5 Z"/><path d="M39.5 6.2 L43.8 1.6 L44.6 9.4 Z"/>' +
-    '<path class="zuzu__collar" d="M33.4 17.6 Q37 20.6 41.6 18.4" fill="none" stroke-width="2.2" stroke-linecap="round"/>' +
-    '<circle class="zuzu__eye" cx="41.2" cy="11.6" r="1.1"/>' +
+    '<path class="zuzu__tail" d="M10 19 C3 17 1 10 5 4" fill="none" stroke-width="4" stroke-linecap="round"/>' +
+    '<g class="zuzu__legs zuzu__legs--a"><rect class="fur" x="13" y="22" width="3.6" height="11" rx="1.8"/><rect class="fur" x="31" y="22" width="3.6" height="11" rx="1.8"/></g>' +
+    '<g class="zuzu__legs zuzu__legs--b"><rect class="fur" x="17" y="22" width="3.6" height="11" rx="1.8"/><rect class="fur" x="35" y="22" width="3.6" height="11" rx="1.8"/></g>' +
+    '<ellipse class="fur" cx="24" cy="20" rx="15" ry="8"/>' +
+    '<path class="patch" d="M12 15 C15 11 24 11 28 13 C25 17 17 18 12 15 Z"/>' +
+    '<circle class="fur" cx="38.5" cy="12.5" r="7"/>' +
+    '<path class="patch" d="M33 9 L34 1.5 L38.5 6.5 Z"/><path class="patch" d="M39.5 6.2 L43.8 1.6 L44.6 9.4 Z"/>' +
+    '<path class="patch" d="M32.2 10.5 C33 6.4 36.6 5.5 39 6.4 C38 9 35 11 32.2 10.5 Z"/>' +
+    '<path class="zuzu__scarf" d="M32.6 17.2 Q37.4 21.4 42.4 17.8 L42.6 20 Q37.2 23.6 32.4 19.4 Z"/>' +
+    '<path class="zuzu__scarf zuzu__scarf-tail" d="M34.4 19.6 L31.6 26.4 L34.6 25.8 L36.6 20.6 Z"/>' +
+    '<circle class="zuzu__eye" cx="41.2" cy="11.6" r="1.1"/><circle class="zuzu__nose" cx="45.2" cy="13.8" r="0.8"/>' +
     '</svg>';
   var CAT_SIT = '<svg class="zuzu__sit" viewBox="0 0 48 36" aria-hidden="true">' +
-    '<path class="zuzu__tail" d="M33 33 C42 33 44 27 40 24" fill="none" stroke-width="3.2" stroke-linecap="round"/>' +
-    '<path d="M14 34 C12 24 16 16 24 16 C32 16 36 24 34 34 Z"/>' +
-    '<circle cx="24" cy="11" r="7"/>' +
-    '<path d="M18 8 L18.6 0.8 L23 5.4 Z"/><path d="M25 5.4 L29.4 0.8 L30 8 Z"/>' +
-    '<path class="zuzu__collar" d="M19.6 16.4 Q24 19 28.4 16.4" fill="none" stroke-width="2.2" stroke-linecap="round"/>' +
+    '<path class="zuzu__tail" d="M33 33 C43 33 44 26 39.5 23.5" fill="none" stroke-width="4" stroke-linecap="round"/>' +
+    '<path class="fur" d="M14 34 C12 24 16 16 24 16 C32 16 36 24 34 34 Z"/>' +
+    '<path class="patch" d="M27 18 C32 19 34.6 25 34 31 C31 29 28.4 23 27 18 Z"/>' +
+    '<circle class="fur" cx="24" cy="11" r="7"/>' +
+    '<path class="patch" d="M18 8 L18.6 0.8 L23 5.4 Z"/><path class="patch" d="M25 5.4 L29.4 0.8 L30 8 Z"/>' +
+    '<path class="patch" d="M24 4 C27.6 4 30.4 6.4 30.8 9.6 C28.4 9.4 25.6 7.6 24 4 Z"/>' +
+    '<path class="zuzu__scarf" d="M18.8 16 Q24 19.6 29.2 16 L29.6 18.4 Q24 22.4 18.4 18.4 Z"/>' +
+    '<path class="zuzu__scarf zuzu__scarf-tail" d="M26.4 19.6 L28.6 26.6 L25.6 26.2 L24.4 20.4 Z"/>' +
     '<circle class="zuzu__eye" cx="21.3" cy="10.4" r="1.05"/><circle class="zuzu__eye" cx="26.7" cy="10.4" r="1.05"/>' +
-    '<rect x="18.5" y="30" width="4" height="4" rx="2"/><rect x="25.5" y="30" width="4" height="4" rx="2"/>' +
+    '<circle class="zuzu__nose" cx="24" cy="12.6" r="0.8"/>' +
+    '<rect class="fur" x="18.5" y="30" width="4" height="4" rx="2"/><rect class="fur" x="25.5" y="30" width="4" height="4" rx="2"/>' +
     '</svg><span class="zuzu__z" aria-hidden="true">z</span>';
   var cat = null, raf = 0, cx = -80, cy = 0, tx = -80, ty = 0, lastMove = 0, roamTimer = 0, mode = finePointer ? 'follow' : 'roam';
 
@@ -96,7 +103,7 @@
   function followLoop() {
     var dx = tx - cx, dy = ty - cy, d = Math.hypot(dx, dy);
     if (d > 46) {
-      var sp = Math.min(4.2, 1.6 + d / 90);
+      var sp = Math.min(7.5, 2.8 + d / 55);
       cx += dx / d * sp; cy += dy / d * sp; face(dx); setState('walk');
     } else {
       setState(performance.now() - lastMove > 7000 ? 'sleep' : 'sit');
@@ -120,7 +127,7 @@
       if (!zuzuOn) return;
       if (!paused && ((dir > 0 && cx >= stopAt) || (dir < 0 && cx <= stopAt))) { paused = true; t0 = ts; setState('sit'); }
       if (paused && ts - t0 > 2600) { paused = false; stopAt = dir > 0 ? w + 60 : -60; }
-      if (!paused) { cx += dir * 1.6; setState('walk'); }
+      if (!paused) { cx += dir * 2.8; setState('walk'); }
       place();
       if ((dir > 0 && cx > w + 50) || (dir < 0 && cx < -50)) { roamTimer = setTimeout(roamOnce, 22000 + Math.random() * 16000); return; }
       raf = requestAnimationFrame(step);

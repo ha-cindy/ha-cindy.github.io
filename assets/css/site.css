@@ -730,14 +730,18 @@ body { font-size: 15.5px; }
 .slides { grid-template-columns: repeat(auto-fill, minmax(min(100%, 210px), 1fr)); gap: 16px; }
 .footer { font-size: 12px; }
 
-/* zuzu the cat */
-.zuzu { position: fixed; left: 0; top: 0; width: 48px; height: 36px; z-index: 70; pointer-events: none; will-change: transform; --cat: #2B2B2A; --cat-eye: #F2F2EF; }
-@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .zuzu { --cat: #D9D9D5; --cat-eye: #1B1B1A; } }
-:root[data-theme="dark"] .zuzu { --cat: #D9D9D5; --cat-eye: #1B1B1A; }
-.zuzu svg { position: absolute; inset: 0; width: 48px; height: 36px; fill: var(--cat); stroke: var(--cat); stroke-width: 0; overflow: visible; filter: drop-shadow(0 0 1px rgba(255,255,255,0.75)) drop-shadow(0 2px 2px rgba(0,0,0,0.18)); }
-.zuzu svg .zuzu__tail { stroke: var(--cat); }
-.zuzu svg .zuzu__collar { stroke: var(--red); fill: none; }
+/* zuzu the cat: white and grey, red scarf */
+.zuzu { position: fixed; left: 0; top: 0; width: 48px; height: 36px; z-index: 70; pointer-events: none; will-change: transform;
+  --fur: #FBFBF9; --patch: #9C9C97; --line: #6F6F6B; --cat-eye: #2B2B2A; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .zuzu { --line: #3A3A38; } }
+:root[data-theme="dark"] .zuzu { --line: #3A3A38; }
+.zuzu svg { position: absolute; inset: 0; width: 48px; height: 36px; overflow: visible; filter: drop-shadow(0 2px 2px rgba(0,0,0,0.2)); }
+.zuzu svg .fur { fill: var(--fur); stroke: var(--line); stroke-width: 0.9; }
+.zuzu svg .patch { fill: var(--patch); stroke: none; }
+.zuzu svg .zuzu__tail { stroke: var(--patch); }
+.zuzu svg .zuzu__scarf { fill: var(--red); stroke: none; }
 .zuzu svg .zuzu__eye { fill: var(--cat-eye); }
+.zuzu svg .zuzu__nose { fill: #E58A93; }
 .zuzu.is-left svg { transform: scaleX(-1); }
 .zuzu .zuzu__sit, .zuzu .zuzu__z { display: none; }
 .zuzu[data-state="sit"] .zuzu__walk, .zuzu[data-state="sleep"] .zuzu__walk { display: none; }
@@ -745,10 +749,12 @@ body { font-size: 15.5px; }
 .zuzu[data-state="sleep"] .zuzu__eye { transform: scaleY(0.15); transform-box: fill-box; transform-origin: center; }
 .zuzu[data-state="sleep"] .zuzu__z { display: block; position: absolute; left: 30px; top: -8px; font-family: var(--f-mono); font-size: 11px; color: var(--muted); animation: zz 2s ease-in-out infinite; }
 @keyframes zz { 0% { opacity: 0; transform: translate(0, 4px); } 40% { opacity: 1; } 100% { opacity: 0; transform: translate(6px, -8px); } }
-.zuzu[data-state="walk"] .zuzu__legs--a { animation: legA 0.32s steps(2) infinite; }
-.zuzu[data-state="walk"] .zuzu__legs--b { animation: legA 0.32s steps(2) infinite reverse; }
-@keyframes legA { 0% { transform: translateY(0); } 100% { transform: translateY(-2.4px); } }
-.zuzu[data-state="walk"] .zuzu__walk { animation: bob 0.32s ease-in-out infinite alternate; }
+.zuzu[data-state="walk"] .zuzu__legs--a { animation: legA 0.2s steps(2) infinite; }
+.zuzu[data-state="walk"] .zuzu__legs--b { animation: legA 0.2s steps(2) infinite reverse; }
+@keyframes legA { 0% { transform: translateY(0); } 100% { transform: translateY(-2.6px); } }
+.zuzu[data-state="walk"] .zuzu__walk { animation: bob 0.2s ease-in-out infinite alternate; }
+.zuzu[data-state="walk"] .zuzu__scarf-tail { animation: flap 0.2s ease-in-out infinite alternate; transform-box: fill-box; transform-origin: 80% 0%; }
+@keyframes flap { from { transform: rotate(-10deg); } to { transform: rotate(14deg); } }
 @keyframes bob { from { translate: 0 0; } to { translate: 0 -1px; } }
 .zuzu[data-state="sit"] .zuzu__sit .zuzu__tail { animation: swish 1.6s ease-in-out infinite alternate; transform-box: fill-box; transform-origin: 0% 100%; }
 @keyframes swish { from { transform: rotate(-6deg); } to { transform: rotate(8deg); } }

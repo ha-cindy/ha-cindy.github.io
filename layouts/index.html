@@ -16,8 +16,8 @@
     </div>
     <div class="hero__aside">
       <figure class="avatar">
-        {{- with resources.Get "img/headshot.png" }}
-        {{- $img := (.Crop "930x930 Center").Resize "520x webp q84" }}
+        {{- with resources.Get "img/headshot-2026.png" }}
+        {{- $img := (.Crop "600x600 Center").Resize "520x webp q84" }}
         <img src="{{ $img.RelPermalink }}" width="220" height="220" alt="Portrait of Cindy Ha">
         {{- end }}
         <figcaption class="avatar__badge"><span class="dot" aria-hidden="true"></span>online</figcaption>
