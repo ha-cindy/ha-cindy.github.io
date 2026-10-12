@@ -1,0 +1,88 @@
+updated: "October 2026"
+
+# shown in the "about me" window on the home page
+education:
+  - school: "northwestern university"
+    degree: "ba, data science + psychology"
+    when: "2024"
+  - school: "rutgers business school"
+    degree: "masters, marketing analytics and insights"
+    when: "expected may 2027"
+
+entries:
+  - kind: education
+    title: "M.S. in Marketing Analytics and Insights"
+    org: "Rutgers Business School"
+    place: "Newark, NJ"
+    when: "Expected May 2027"
+    current: true
+    details:
+      - "Relevant coursework: Marketing Research, Customer Journey Analytics, AI in Marketing, Analytics for Business Intelligence"
+      - "MSMAI Scholarship ($1,500), 2026"
+
+  - kind: research
+    title: "Lab Manager"
+    org: "Princeton University"
+    place: "Princeton, NJ"
+    when: "Sep 2024 – Aug 2026"
+    details:
+      - "Advanced 4–5 concurrent research projects toward publication by building NLP/ETL pipelines in Python, including audio transcription (OpenAI Whisper) and receipt data scraping (pdfplumber), auditing academic papers by independently replicating statistical analyses, and piloting new studies"
+      - "Conducted social network analysis on data from 500+ business owners using R, integrating survey and referral data to map mentorship networks, identify central nodes, and visualize patterns"
+      - "Oversaw lab operations by submitting monthly expense reports, scheduling meetings, managing communications, and organizing lab-wide events including dissertation defenses and socials"
+      - "Presented: Ha, C., Shah, A.K. (2025). Impossible Expectations for the Poor. Association for Psychological Science Conference, Washington, D.C."
+
+  - kind: industry
+    title: "Data Analytics Intern"
+    org: "Echo Global Logistics"
+    place: "Chicago, IL"
+    when: "Jun 2024 – Aug 2024"
+    details:
+      - "Designed 8 pricing allocation algorithms for RoadTex using SQL queries, mileage APIs, and cloud-based virtual machines, aligning pricing strategy with operational cost structures to support more accurate, cost-based pricing decisions"
+      - "Built a centralized knowledge repository on Bloomfire documenting 15 high-impact analytics projects, standardizing institutional knowledge and improving cross-team collaboration across 3 teams"
+
+  - kind: education
+    title: "B.A. in Data Science and Psychology"
+    org: "Northwestern University"
+    place: "Evanston, IL"
+    when: "Jun 2024"
+    details:
+      - "GPA: 3.92/4.0"
+      - "Relevant coursework: Advanced Machine Learning, Data Visualization, Using R for Analysis, Data Science Capstone"
+      - "Psi Chi, International Honor Society in Psychology; Weinberg College Dean's List (9/9 quarters)"
+
+  - kind: industry
+    title: "Lead Generation Intern"
+    org: "Energy CX"
+    place: "Chicago, IL"
+    when: "Mar 2024 – May 2024"
+    details:
+      - "Researched and validated 1,000+ leads against company ICP criteria, maintaining CRM data integrity to support sales and marketing prioritization"
+      - "Consolidated client-identification criteria into onboarding materials for future interns and analysts; co-led training for 2 incoming interns alongside the head analyst"
+
+  - kind: industry
+    title: "Clerical Aide"
+    org: "Northwestern Student Finance"
+    place: "Evanston, IL"
+    when: "Oct 2022 – Feb 2023"
+    details:
+      - "Digitized 300+ closed student accounts into a searchable cloud archive dating back to the 1970s while auditing third-party transactions for billing compliance"
+
+skills:
+  - group: "Programming & tools"
+    items: ["R", "Python", "SQL", "RStudio", "Git", "Jupyter"]
+  - group: "ML & statistics"
+    items: ["Hypothesis testing", "Power analysis", "Feature engineering", "Model optimization", "Data scraping", "Social network analysis", "NLP pipelines"]
+  - group: "Research & business tools"
+    items: ["Qualtrics", "Prolific", "CloudResearch", "HubSpot", "CoStar", "REDCap", "Overleaf", "MS Office", "Concur"]
+  - group: "Languages"
+    items: ["English (native)", "Vietnamese (intermediate)", "Spanish (elementary)", "Chinese (elementary)"]
+
+awards:
+  - year: "2026"
+    text: "MSMAI Scholarship, Rutgers Business School ($1,500)"
+  - year: "2024"
+    text: "Psi Chi, International Honor Society in Psychology, Northwestern University"
+  - year: "2021–24"
+    text: "Weinberg College of Arts and Sciences Dean's List (9/9 quarters)"
+  - year: "2021–23"
+    text: "Palumbo Family Foundation Scholarship, 3x recipient ($20,000)"

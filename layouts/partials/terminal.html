@@ -1,0 +1,16 @@
+<dialog class="term" id="term" aria-label="Terminal">
+  <div class="win__bar chrome-bar">
+    <span class="mono">SYS://terminal</span>
+    <form method="dialog"><button class="win__btn is-red" type="submit" aria-label="Close terminal"></button></form>
+  </div>
+  <div class="term__body">
+    <div class="term__log" id="term-log" aria-live="polite">
+      <p>cindy_os v2.0 ✦ type <b>help</b> to see commands.</p>
+    </div>
+    <form class="term__line" id="term-form" autocomplete="off">
+      <label for="term-input" class="mono">guest@cindy:~$</label>
+      <input id="term-input" name="cmd" type="text" spellcheck="false" autocapitalize="off" aria-label="Command">
+    </form>
+  </div>
+  <script type="application/json" id="term-data">{{ dict "email" site.Params.email "socials" site.Params.socials "tagline" site.Params.tagline "seeking" site.Params.seeking | jsonify | safeJS }}</script>
+</dialog>

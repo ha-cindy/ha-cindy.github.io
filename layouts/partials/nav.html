@@ -1,0 +1,21 @@
+<header class="nav chrome-bar">
+  <a class="nav__brand" href="{{ "/" | relURL }}" aria-label="Cindy Ha, home">
+    {{ partial "sparkle.html" (dict "size" 16 "class" "is-red") }}
+    <span>cindy ha</span>
+  </a>
+  <nav class="nav__links" aria-label="Main">
+    {{- $current := . }}
+    {{- range site.Menus.main }}
+      {{- $active := or ($current.IsMenuCurrent "main" .) ($current.HasMenuCurrent "main" .) (hasPrefix $current.RelPermalink .URL) }}
+      <a href="{{ .URL | relURL }}" {{ if $active }}aria-current="page"{{ end }}>{{ .Name }}</a>
+    {{- end }}
+  </nav>
+  <div class="nav__tools">
+    <button class="icon-btn" type="button" data-term-open aria-label="Open terminal (press /)" title="Terminal (press /)">
+      <span class="mono">&gt;_</span>
+    </button>
+    <button class="icon-btn" type="button" data-theme-toggle aria-label="Switch light or dark mode" title="Light / dark">
+      <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"></circle><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg>
+    </button>
+  </div>
+</header>

@@ -1,28 +1,45 @@
-{{- if lt hugo.Version "0.112.4" }}
-{{- errorf "=> hugo v0.112.4 or greater is required for hugo-PaperMod to build " }}
-{{- end -}}
-
 <!DOCTYPE html>
-<html lang="{{ site.Language }}" dir="{{ .Language.LanguageDirection | default "auto" }}">
-
+<html lang="en">
 <head>
-    {{- partial "head.html" . }}
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>{{ if .IsHome }}{{ site.Title }}{{ else }}{{ .Title | default site.Title }} · {{ site.Title }}{{ end }}</title>
+  {{- $desc := .Description | default .Summary | default site.Params.description | plainify | truncate 160 }}
+  <meta name="description" content="{{ $desc }}">
+  <meta property="og:title" content="{{ .Title | default site.Title }}">
+  <meta property="og:description" content="{{ $desc }}">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="{{ .Permalink }}">
+  <meta name="theme-color" content="#F3F3F5" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0C0C0E" media="(prefers-color-scheme: dark)">
+  <link rel="canonical" href="{{ .Permalink }}">
+  <link rel="icon" href="{{ "favicon-cat.png" | absURL }}">
+  <link rel="apple-touch-icon" href="{{ "apple-touch-icon.png" | absURL }}">
+  <script>
+    (function () {
+      try { var t = localStorage.getItem('theme'); if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t); } catch (e) {}
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,500..900&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Pinyon+Script&family=Righteous&display=swap">
+  {{- $css := resources.Get "css/site.css" | minify | fingerprint }}
+  <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}">
+  {{- if and hugo.IsProduction site.Params.googleAnalyticsID }}
+  {{- partial "analytics.html" . }}
+  {{- end }}
 </head>
-
-<body class="
-{{- if (or (ne .Kind `page` ) (eq .Layout `archives`) (eq .Layout `search`)) -}}
-{{- print "list" -}}
-{{- end -}}
-{{- if eq site.Params.defaultTheme `dark` -}}
-{{- print " dark" }}
-{{- end -}}
-" id="top">
-    {{- if not .IsHome  }}
-    {{- partialCached "header.html" . .Page -}}
-    {{- end }}
-    <main class="main">
-        {{- block "main" . }}{{ end }}
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <div class="page">
+    {{ partial "nav.html" . }}
+    <main id="main" class="stack">
+      {{ block "main" . }}{{ end }}
     </main>
-    {{ partialCached "footer.html" . .Layout .Kind (.Param "hideFooter") (.Param "ShowCodeCopyButtons") -}}
+    {{ partial "footer.html" . }}
+  </div>
+  {{ partial "terminal.html" . }}
+  {{- $js := resources.Get "js/site.js" | minify | fingerprint }}
+  <script src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}" defer></script>
 </body>
 </html>

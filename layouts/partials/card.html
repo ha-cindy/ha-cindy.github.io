@@ -1,0 +1,28 @@
+{{- $p := . -}}
+{{- $tags := slice -}}
+{{- range $p.Params.skills }}{{ $tags = $tags | append (. | urlize) }}{{ end -}}
+{{- range $p.Params.tools }}{{ $tags = $tags | append (. | urlize) }}{{ end -}}
+{{- $n := $p.Params.assignment | default $p.Weight -}}
+<a class="card" href="{{ $p.RelPermalink }}" data-tags="{{ delimit $tags " " }}" data-track="case_study_click" data-track-title="{{ $p.Title }}">
+  <div class="card__bar">
+    <span>{{ with $p.Parent }}{{ .Params.linkTitle | default .Title | lower | replaceRE "[^a-z0-9]+" "_" }}{{ end }}_0{{ $n }}.case</span>
+    <span class="card__dot" aria-hidden="true"></span>
+  </div>
+  {{- $cover := $p.Resources.GetMatch "cover.*" }}
+  <div class="card__thumb{{ if and (not $cover) (eq (mod $n 2) 0) }} is-dark{{ end }}">
+    {{- with $cover }}
+      {{- $img := .Resize "720x webp q80" }}
+      <img src="{{ $img.RelPermalink }}" width="{{ $img.Width }}" height="{{ $img.Height }}" alt="" loading="lazy" decoding="async">
+    {{- else }}
+      {{ partial "sparkle.html" (dict "size" 22) }}
+    {{- end }}
+  </div>
+  <div class="card__body">
+    <div class="chips">
+      {{- range first 2 $p.Params.skills }}<span class="chip">{{ . }}</span>{{ end }}
+    </div>
+    <h3 class="h3">{{ $p.Title }}</h3>
+    <p>{{ $p.Params.summary | default $p.Summary | plainify | htmlUnescape | truncate 210 }}</p>
+    <span class="link-arrow">open case study <span aria-hidden="true">→</span></span>
+  </div>
+</a>

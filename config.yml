@@ -1,74 +1,41 @@
-baseURL: "https://ha-cindy.github.io/" 
+baseURL: "https://ha-cindy.github.io/"
 title: Cindy Ha
 theme: PaperMod
 
 enableInlineShortcodes: true
 enableRobotsTXT: true
-
-taxonomies:
-    tag: tags
+disableKinds: ["taxonomy", "term"]
 
 menu:
     main:
         - name: about
-          url: about/
+          url: /about/
           weight: 1
-        - name: projects
-          url: projects/
+        - name: portfolio
+          url: /portfolio/
           weight: 2
         - name: cv
-          url: /cv.pdf
+          url: /cv/
           weight: 3
-          target: "_blank"
         - name: research
-          url: research/
+          url: /research/
           weight: 4
         - name: art
-          url: art/
+          url: /art/
           weight: 5
 
 params:
-    description: "Obsessed with spreadsheets and people-watching. Data anlayst & researcher blending behavioral science with data."
+    description: "Data analyst and researcher blending behavioral science with data. M.S. Marketing Analytics and Insights at Rutgers Business School."
+    tagline: "obsessed with spreadsheets and people-watching. i blend behavioral science with data to understand why people do what they do."
     author: Cindy Ha
     googleAnalyticsID: "G-XLPXPQYZ4Q"
-    DateFormat: "January 2006"
-    defaultTheme: light
-    hideFooter: true
-    disableThemeToggle: false
-    ShowShareButtons: false
-    ShowReadingTime: false
-    disableSpecial1stPost: true
-    disableAnchoredHeadings: true
-    ShowPostNavLinks: false
-    ShowBreadCrumbs: false
-    ShowCodeCopyButtons: true
-    ShowAllPagesInArchive: false
-    MainSections: ["books","courses","papers","data"]
-    ShowToc: false
-    disableScrollToTop: true
-    TocOpen: true
-    ShowWordCount: false
-    UseHugoToc: true
-    comments: false
-    math: true
-    profileMode:
-          enabled: true
-          title: Cindy Ha
-          subtitle: "Obsessed with spreadsheets and people-watching. <br> Data analyst & researcher blending behavioral science with data."
-          imageUrl: "headshot.png"
-          imageWidth: 140
-          imageHeight: 140
-          buttons:
-            - name: about
-              url: about/
-            - name: projects
-              url: projects/
-            - name: cv
-              url: cv/
-
-    socialIcons:
-        - name: Email
-          url: mailto:cindyha@princeton.edu
+    email: "hacindy02@gmail.com"
+    location: "Rutgers Business School"
+    studying: "m.s. marketing analytics & insights ('27)"
+    seeking: "marketing/consumer insights roles"
+    # which portfolio collection gets the "quick peek" on the home page
+    homePeek: "/portfolio/duolingo-aim"
+    socials:
         - name: LinkedIn
           url: https://www.linkedin.com/in/hacindy02/
         - name: GitHub
@@ -76,23 +43,13 @@ params:
         - name: Bluesky
           url: https://bsky.app/profile/hacindy.bsky.social
 
-    assets:
-        disableScrollBarStyle: true
-    cover:
-        hiddenInList: false
-        hiddenInSingle: true
-    label:
-      text: "Cindy Ha"
-      icon: /favicon-cat.png
-      iconHeight: 19
-
 markup:
     goldmark:
         renderer:
             unsafe: true
     highlight:
         guessSyntax: true
-        style: autumn 
+        style: autumn
     tableOfContents:
         endLevel: 2
         ordered: false

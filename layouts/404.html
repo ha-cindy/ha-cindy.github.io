@@ -1,0 +1,11 @@
+{{ define "main" }}
+<section class="win">
+  <div class="win__bar win__bar--dark"><span class="win__title">ERROR://404</span><div class="win__ctrls"><span class="win__btn is-red" aria-hidden="true"></span></div></div>
+  <div class="win__body scan notfound">
+    <span class="eyebrow">{{ partial "sparkle.html" (dict "size" 12 "class" "is-red") }} file not found</span>
+    <h1 class="funky h1 chrome-text">404</h1>
+    <p class="lede">this page wandered off. try the terminal (press <kbd>/</kbd>) or head home.</p>
+    <div class="btns"><a class="btn btn--primary" href="{{ "/" | relURL }}">go home</a><a class="btn btn--chrome" href="{{ "/portfolio/" | relURL }}">see portfolio</a></div>
+  </div>
+</section>
+{{ end }}
