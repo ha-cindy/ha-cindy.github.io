@@ -29,7 +29,6 @@
       <span class="collection__text">
         <span class="eyebrow">collection · {{ len .RegularPages }} case studies</span>
         <span class="h3">{{ .Params.linkTitle | default .Title | lower }}</span>
-        <span class="muted">{{ .Params.course | lower }}</span>
         <span>{{ .Params.summary | default .Summary | plainify | htmlUnescape }}</span>
         <span class="link-arrow">open collection <span aria-hidden="true">→</span></span>
       </span>
