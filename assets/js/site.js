@@ -161,7 +161,6 @@
   setupFilter('[data-filter]', 'data-filter-tag', '[data-filter-grid] .card', 'data-tags', 'portfolio_filter', function (n) {
     if (countLabel) countLabel.textContent = n + (n === 1 ? ' item' : ' items');
   });
-  setupFilter('[data-tl-filter]', 'data-kind', '.timeline .tl', 'data-kind', 'cv_filter');
 
   /* ---------- lightbox (case study slides) ---------- */
   var lb = document.getElementById('lightbox');

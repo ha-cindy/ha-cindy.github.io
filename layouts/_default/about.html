@@ -55,16 +55,16 @@
         <h2 class="funky h2">milestones</h2>
       </div>
     </div>
-    <ol class="timeline">
-      {{- range $i, $m := . }}
-      <li class="tl{{ if eq $i 0 }} is-current{{ end }}">
-        <div class="tl__head">
-          <span class="tl__when">{{ $m.when | lower }}</span>
-        </div>
-        <p class="milestone">{{ $m.text | markdownify }}</p>
-      </li>
-      {{- end }}
-    </ol>
+    <div class="changelog" tabindex="0" aria-label="Milestones, scrollable">
+      <ol>
+        {{- range $i, $m := . }}
+        <li{{ if eq $i 0 }} class="is-current"{{ end }}>
+          <span class="changelog__when">{{ $m.when | lower }}</span>
+          <span class="changelog__text">{{ $m.text | markdownify }}</span>
+        </li>
+        {{- end }}
+      </ol>
+    </div>
   </div>
 </section>
 {{- end }}
