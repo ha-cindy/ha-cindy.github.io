@@ -1,0 +1,64 @@
+{{ define "main" }}
+{{- $isRoot := eq .RelPermalink "/portfolio/" }}
+{{- $pages := .RegularPagesRecursive.ByWeight }}
+{{- $tags := slice }}
+{{- range $pages }}{{ range .Params.skills }}{{ $tags = $tags | append . }}{{ end }}{{ end }}
+{{- $tags = $tags | uniq | sort }}
+
+<section class="win">
+  <div class="win__bar win__bar--dark">
+    <span class="win__title">C:\portfolio\{{ if not $isRoot }}{{ .Params.linkTitle | default .Title | lower | replaceRE "[^a-z0-9]+" "_" }}\{{ end }}</span>
+    <div class="win__ctrls"><span class="win__meta" data-count-label>{{ len $pages }} items</span></div>
+  </div>
+  <div class="win__body stack" style="gap: 28px">
+    {{- if not $isRoot }}<nav class="crumbs" aria-label="Breadcrumb"><a href="{{ "/portfolio/" | relURL }}">portfolio</a><span>/</span><span>{{ .Params.linkTitle | default .Title }}</span></nav>{{ end }}
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">{{ partial "sparkle.html" (dict "size" 12 "class" "is-red") }} {{ if $isRoot }}all work{{ else }}{{ .Params.course | default "collection" | lower }}{{ end }}</span>
+        <h1 class="funky h2">{{ .Title }}</h1>
+      </div>
+      <p>{{ .Params.summary | default .Summary | plainify | htmlUnescape }}</p>
+    </div>
+
+    {{- if not $isRoot }}{{ with .Content }}<div class="prose">{{ . }}</div>{{ end }}{{ end }}
+
+    {{- if $isRoot }}
+    {{- range .Sections.ByWeight }}
+    <a class="collection" href="{{ .RelPermalink }}">
+      <span class="collection__art">{{ partial "sparkle.html" (dict "size" 54 "class" "is-solid") }}</span>
+      <span class="collection__text">
+        <span class="eyebrow">collection · {{ len .RegularPages }} case studies</span>
+        <span class="h3">{{ .Params.linkTitle | default .Title | lower }}</span>
+        <span class="muted">{{ .Params.course | lower }}</span>
+        <span>{{ .Params.summary | default .Summary | plainify | htmlUnescape }}</span>
+        <span class="link-arrow">open collection <span aria-hidden="true">→</span></span>
+      </span>
+    </a>
+    {{- end }}
+    {{- end }}
+
+    {{- if gt (len $tags) 1 }}
+    <div class="filterbar" role="group" aria-label="Filter case studies by skill">
+      <span class="filterbar__label">filter by skill:</span>
+      <div class="chips" data-filter>
+        <button class="chip" type="button" data-filter-tag="" aria-pressed="true">all <b>{{ len $pages }}</b></button>
+        {{- range $tags }}
+          {{- $t := . }}
+          {{- $n := 0 }}
+          {{- range $pages }}{{ if in .Params.skills $t }}{{ $n = add $n 1 }}{{ end }}{{ end }}
+          <button class="chip" type="button" data-filter-tag="{{ $t | urlize }}" aria-pressed="false">{{ $t }} <b>{{ $n }}</b></button>
+        {{- end }}
+      </div>
+    </div>
+    {{- end }}
+
+    {{- if $pages }}
+    <div class="grid" data-filter-grid>
+      {{- range $pages }}{{ partial "card.html" . }}{{ end }}
+    </div>
+    {{- else }}
+    <div class="empty">case studies loading soon ✦</div>
+    {{- end }}
+  </div>
+</section>
+{{ end }}

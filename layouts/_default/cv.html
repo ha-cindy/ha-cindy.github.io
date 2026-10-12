@@ -1,0 +1,73 @@
+{{ define "main" }}
+{{- $cv := site.Data.cv }}
+<section class="win">
+  <div class="win__bar win__bar--dark">
+    <span class="win__title">cv.exe</span>
+    <div class="win__ctrls"><span class="win__meta">updated {{ $cv.updated | lower }}</span></div>
+  </div>
+  <div class="win__body scan stack" style="gap: 28px">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">{{ partial "sparkle.html" (dict "size" 12 "class" "is-red") }} curriculum vitae</span>
+        <h1 class="funky h2">cv</h1>
+      </div>
+      <div class="btns">
+        <a class="btn btn--primary" href="{{ "cv.pdf" | relURL }}" target="_blank" rel="noopener" data-track="cv_download" data-track-location="cv_page">download pdf ↓</a>
+        <a class="btn btn--chrome" href="mailto:{{ site.Params.email }}" data-track="contact_click" data-track-method="email">email me</a>
+      </div>
+    </div>
+
+    <div class="filterbar" role="group" aria-label="Filter experience">
+      <span class="filterbar__label">show:</span>
+      <div class="chips" data-tl-filter>
+        {{- $kinds := slice "all" "education" "research" "industry" }}
+        {{- range $kinds }}
+          {{- $k := . }}
+          {{- $n := cond (eq $k "all") (len $cv.entries) (len (where $cv.entries "kind" $k)) }}
+          <button class="chip" type="button" data-kind="{{ if ne $k "all" }}{{ $k }}{{ end }}" aria-pressed="{{ eq $k "all" }}">{{ $k }} <b>{{ $n }}</b></button>
+        {{- end }}
+      </div>
+    </div>
+
+    <ol class="timeline">
+      {{- range $i, $e := $cv.entries }}
+      <li class="tl{{ if $e.current }} is-current{{ end }}" data-kind="{{ $e.kind }}">
+        <div class="tl__head">
+          <h3>{{ $e.title }}</h3>
+          <span class="tl__when">{{ $e.when | lower }}</span>
+        </div>
+        <div class="tl__org">{{ $e.org }} <span>· {{ $e.place }} · {{ $e.kind }}</span></div>
+        {{- with $e.details }}
+        <details{{ if lt $i 3 }} open{{ end }}>
+          <summary>details ({{ len . }})</summary>
+          <ul>{{ range . }}<li>{{ . }}</li>{{ end }}</ul>
+        </details>
+        {{- end }}
+      </li>
+      {{- end }}
+    </ol>
+  </div>
+</section>
+
+<section class="cv-cols">
+  <div class="win">
+    <div class="win__bar chrome-bar"><span class="win__title">skills.cfg</span><div class="win__ctrls"><button class="win__btn" type="button" data-min aria-label="Minimize window" aria-expanded="true"></button></div></div>
+    <div class="win__body">
+      {{- range $cv.skills }}
+      <div class="skill-group">
+        <span class="eyebrow">{{ .group }}</span>
+        <div class="chips">{{ range .items }}<span class="chip">{{ . }}</span>{{ end }}</div>
+      </div>
+      {{- end }}
+    </div>
+  </div>
+  <div class="win">
+    <div class="win__bar chrome-bar"><span class="win__title">awards.log</span><div class="win__ctrls"><button class="win__btn" type="button" data-min aria-label="Minimize window" aria-expanded="true"></button></div></div>
+    <div class="win__body">
+      <ul class="awards">
+        {{- range $cv.awards }}<li><b>{{ .year }}</b><span>{{ .text }}</span></li>{{ end }}
+      </ul>
+    </div>
+  </div>
+</section>
+{{ end }}

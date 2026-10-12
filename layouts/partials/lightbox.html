@@ -1,0 +1,14 @@
+<dialog class="lightbox" id="lightbox" aria-label="Image viewer">
+  <div class="win__bar chrome-bar">
+    <span class="win__title" data-lb-title>viewer</span>
+    <form method="dialog" style="margin: 0; display: flex"><button class="win__btn is-red" type="submit" aria-label="Close viewer"></button></form>
+  </div>
+  <div class="lightbox__img"><img data-lb-img src="data:," alt=""></div>
+  <div class="lightbox__foot">
+    <span class="mono" style="font-size: 13px" data-lb-cap></span>
+    <div class="btns">
+      <button class="btn btn--chrome" type="button" data-lb-prev aria-label="Previous image">← prev</button>
+      <button class="btn btn--chrome" type="button" data-lb-next aria-label="Next image">next →</button>
+    </div>
+  </div>
+</dialog>
