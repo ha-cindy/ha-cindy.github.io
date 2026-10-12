@@ -10,6 +10,15 @@
   <meta property="og:description" content="{{ $desc }}">
   <meta property="og:type" content="website">
   <meta property="og:url" content="{{ .Permalink }}">
+  <meta property="og:site_name" content="{{ site.Title }}">
+  <meta property="og:image" content="{{ "og.jpg" | absURL }}">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Cindy Ha: marketing analytics and insights at Rutgers. Obsessed with spreadsheets and people-watching.">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ .Title | default site.Title }}">
+  <meta name="twitter:description" content="{{ $desc }}">
+  <meta name="twitter:image" content="{{ "og.jpg" | absURL }}">
   <meta name="theme-color" content="#F3F3F5" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#0C0C0E" media="(prefers-color-scheme: dark)">
   <link rel="canonical" href="{{ .Permalink }}">
