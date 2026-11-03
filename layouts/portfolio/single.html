@@ -1,7 +1,7 @@
 {{ define "main" }}
 {{- $n := .Params.assignment | default .Weight }}
 {{- $col := .Parent }}
-{{- $kind := "case study" }}{{ with .Params.assignment }}{{ $kind = printf "assignment %v" . }}{{ end }}
+{{- $kind := "case study" }}{{ with .Params.assignment }}{{ $kind = printf "assignment %v" . }}{{ end }}{{ with .Params.label }}{{ $kind = . }}{{ end }}
 {{- $deck := .Resources.GetMatch "deck.pdf" }}
 {{- $slides := sort (.Resources.Match "slides/*") "Name" }}
 {{- $label := "" }}{{ with $col }}{{ $label = .Params.linkTitle | default .Title | lower | replaceRE "[^a-z0-9]+" "_" }}{{ end }}
