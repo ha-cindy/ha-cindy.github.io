@@ -2,7 +2,7 @@
 title: "Impossible expectations for the poor"
 weight: 1
 label: "poster"
-featured: false
+featured: true
 summary: "two experiments on the inconsistent, even impossible, standards people hold for the poor."
 deliverable: "APS 2025 conference poster"
 skills: ["Experimental design", "Behavioral science", "Statistical analysis"]

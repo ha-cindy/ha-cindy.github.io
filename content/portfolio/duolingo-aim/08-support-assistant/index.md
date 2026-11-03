@@ -2,7 +2,7 @@
 title: "Ollie knows when to stop"
 assignment: 8
 weight: 8
-featured: false
+featured: true
 summary: "an AI support assistant for Duolingo: what it answers, what it never touches, and what broke when we attacked it."
 deliverable: "16-slide playbook + live assistant"
 skills: ["Customer experience", "Conversational AI", "AI testing"]

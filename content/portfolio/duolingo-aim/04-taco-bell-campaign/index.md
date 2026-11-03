@@ -2,7 +2,7 @@
 title: "Duo has a date at Taco Bell"
 assignment: 4
 weight: 4
-featured: true
+featured: false
 summary: "a Duolingo × Taco Bell visual campaign art-directed with AI image tools."
 deliverable: "17-slide visual campaign"
 skills: ["Creative direction", "Design systems", "AI image generation"]

@@ -1,7 +1,7 @@
 ---
 title: "What's next for OpenAI?"
 weight: 1
-featured: false
+featured: true
 summary: "a group case study on why so few of ChatGPT's 1.2B weekly users pay, and how to fix it."
 deliverable: "25-slide group case presentation"
 skills: ["Brand positioning", "Segmentation", "Competitive analysis"]

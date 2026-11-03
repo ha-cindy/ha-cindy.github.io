@@ -33,8 +33,8 @@ Make the folder right inside `content/portfolio/`, for example `content/portfoli
 
 ## Change what the home page shows
 
-- **Which collection gets the "quick peek":** in `config.yml`, change `homePeek: "/portfolio/duolingo-aim"`.
-- **Which cards appear there:** set `featured: true` on 2 case studies.
+- **Where the "quick peek" pulls from:** in `config.yml`, `homePeek: "/portfolio"` picks from every collection. Set it to one collection (like `"/portfolio/duolingo-aim"`) to only show that one.
+- **Which cards appear there:** set `featured: true` on up to 4 projects.
 - **Status panel text (location, studying, seeking):** in `config.yml` under `params`.
 - **Education and experience in "about me":** `data/cv.yaml`.
 

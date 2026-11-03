@@ -28,7 +28,7 @@ params:
     studying: "m.s. marketing analytics & insights"
     seeking: "marketing/consumer insights roles"
     # which portfolio collection gets the "quick peek" on the home page
-    homePeek: "/portfolio/duolingo-aim"
+    homePeek: "/portfolio"
     socials:
         - name: LinkedIn
           url: https://www.linkedin.com/in/hacindy02/
