@@ -2,7 +2,7 @@
 title: "Reward commitment, respect goodbyes"
 assignment: 5
 weight: 5
-featured: false
+featured: true
 summary: "RFM segmentation and a lifecycle email plan for Duolingo learners."
 deliverable: "15-slide lifecycle plan"
 skills: ["RFM segmentation", "Lifecycle marketing", "Email & CRM"]

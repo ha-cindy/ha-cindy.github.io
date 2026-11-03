@@ -3,7 +3,7 @@ title: "Impossible expectations for the poor"
 weight: 1
 label: "poster"
 featured: true
-summary: "two experiments on the inconsistent, even impossible, standards people hold for the poor."
+summary: "looking into what happens when people flatten their perspective of the poor down to a singular need: money."
 deliverable: "APS 2025 conference poster"
 skills: ["Experimental design", "Behavioral science", "Statistical analysis"]
 bullets:

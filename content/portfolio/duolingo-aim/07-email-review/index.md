@@ -2,7 +2,7 @@
 title: "Opens rank emails backwards"
 assignment: 7
 weight: 7
-featured: true
+featured: false
 summary: "a performance review of six months of Duolingo email, plus a live scorecard."
 deliverable: "16-slide performance review"
 skills: ["Performance measurement", "Email analytics", "Dashboard design"]
