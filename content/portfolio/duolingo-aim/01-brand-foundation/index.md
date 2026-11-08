@@ -10,4 +10,5 @@ tools: ["Claude"]
 bullets:
   - "Compared Duolingo with Babbel, Rosetta Stone, Preply, and Busuu and found the gap: Video Call fixes the \"I can't hold a conversation\" problem, but it's locked behind Max (9% of subscribers)."
   - "Segmented learners by motivation and recommended **Gen Z heritage and identity learners** as the segment to win."
+highlights: [4, 6, 8]
 ---

@@ -10,4 +10,7 @@ tools: ["Claude"]
 bullets:
   - "Reviewed **208M emails** across 7 programs. Targeted sends were **10.15% of email but 54.02% of revenue**, and one typo overstated revenue by **$21.8M**."
   - "Built a live scorecard on clicks, revenue, and list health, since opens ranked programs right only 3 of 7 times. Recommended fixing Win-Back first."
+highlights: [2, 5, 7]
+live: "https://claude.ai/artifact/VZhChxhMGpVJyCECP6EHyG"
+liveLabel: "open the live scorecard"
 ---

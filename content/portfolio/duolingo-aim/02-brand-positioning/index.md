@@ -10,4 +10,5 @@ tools: ["Claude"]
 bullets:
   - "Wrote a positioning statement and built four perceptual maps. Only **commitment × method** showed an empty corner for Duolingo: no schedule, no second person."
   - "Recommended owning **the ten-minute window** and giving up the fluency race."
+highlights: [2, 3, 8]
 ---

@@ -3,7 +3,10 @@
 {{- range $p.Params.skills }}{{ $tags = $tags | append (. | urlize) }}{{ end -}}
 {{- range $p.Params.tools }}{{ $tags = $tags | append (. | urlize) }}{{ end -}}
 {{- $n := $p.Params.assignment | default $p.Weight -}}
-<a class="card" href="{{ $p.RelPermalink }}" data-tags="{{ delimit $tags " " }}" data-track="case_study_click" data-track-title="{{ $p.Title }}">
+{{- $slides := sort ($p.Resources.Match "slides/*") "Name" -}}
+{{- $deckList := slice -}}
+{{- range $slides }}{{ $deckList = $deckList | append (.Resize "1600x webp q82").RelPermalink }}{{ end -}}
+<article class="card" data-tags="{{ delimit $tags " " }}">
   <div class="card__bar">
     <span>{{ with $p.Parent }}{{ .Params.linkTitle | default .Title | lower | replaceRE "[^a-z0-9]+" "_" }}{{ end }}_0{{ $n }}.case</span>
     <span class="card__dot" aria-hidden="true"></span>
@@ -21,8 +24,13 @@
     <div class="chips">
       {{- range first 2 $p.Params.skills }}<span class="chip">{{ . }}</span>{{ end }}
     </div>
-    <h3 class="h3">{{ $p.Title }}</h3>
+    <h3 class="h3"><a class="card__link" href="{{ $p.RelPermalink }}" data-track="case_study_click" data-track-title="{{ $p.Title }}">{{ $p.Title }}</a></h3>
     <p>{{ $p.Params.summary | default $p.Summary | plainify | htmlUnescape | truncate 210 }}</p>
-    <span class="link-arrow">open case study <span aria-hidden="true">→</span></span>
+    <div class="card__actions">
+      {{- with $deckList }}
+      <button class="card__deck" type="button" data-deck="{{ . | jsonify }}" data-deck-title="{{ $p.Title }}" aria-label="{{ $p.Params.deckLabel | default "view the deck" }}: {{ $p.Title }}"><span aria-hidden="true">▶</span> {{ $p.Params.deckLabel | default "view the deck" }}</button>
+      {{- end }}
+      <span class="link-arrow" aria-hidden="true">open case study <span>→</span></span>
+    </div>
   </div>
-</a>
+</article>

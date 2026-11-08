@@ -242,45 +242,76 @@
     if (countLabel) countLabel.textContent = n + (n === 1 ? ' item' : ' items');
   });
 
-  /* ---------- lightbox (case study slides) ---------- */
+  /* ---------- lightbox (slides, decks from cards, gallery) ---------- */
   var lb = document.getElementById('lightbox');
   if (lb && typeof lb.showModal === 'function') {
     var lbImg = lb.querySelector('[data-lb-img]');
     var lbCap = lb.querySelector('[data-lb-cap]');
     var lbTitle = lb.querySelector('[data-lb-title]');
-    var triggers = Array.prototype.slice.call(document.querySelectorAll('[data-lightbox-src]'));
+    var lbBar = lb.querySelector('[data-lb-bar]');
+    var lbPrev = lb.querySelector('[data-lb-prev]');
+    var lbNext = lb.querySelector('[data-lb-next]');
+    var list = [];
     var idx = 0;
-    var visible = function () { return triggers.filter(function (t) { return !t.classList.contains('is-hidden'); }); };
     var show = function (i) {
-      var list = visible();
       if (!list.length) return;
       idx = (i + list.length) % list.length;
-      var t = list[idx];
-      lbImg.src = t.getAttribute('data-lightbox-src');
-      lbImg.alt = t.getAttribute('data-lightbox-cap') || '';
-      lbCap.textContent = (t.getAttribute('data-lightbox-cap') || '').toLowerCase();
+      var it = list[idx];
+      lbImg.src = it.src;
+      lbImg.alt = it.cap;
+      lbCap.textContent = it.cap.toLowerCase();
       lbTitle.textContent = 'viewer · ' + (idx + 1) + ' / ' + list.length;
-      lb.querySelector('[data-lb-prev]').hidden = lb.querySelector('[data-lb-next]').hidden = list.length < 2;
-      var bar = lb.querySelector('[data-lb-bar]');
-      if (bar) bar.style.width = ((idx + 1) / list.length * 100) + '%';
+      lbPrev.hidden = lbNext.hidden = list.length < 2;
+      if (lbBar) { lbBar.parentNode.hidden = list.length < 2; lbBar.style.width = ((idx + 1) / list.length * 100) + '%'; }
       [idx + 1, idx - 1].forEach(function (j) {
         var n = list[(j + list.length) % list.length];
-        if (n) { var pre = new Image(); pre.src = n.getAttribute('data-lightbox-src'); }
+        if (n) { var pre = new Image(); pre.src = n.src; }
       });
     };
-    triggers.forEach(function (t) {
-      t.addEventListener('click', function () {
-        show(visible().indexOf(t));
-        lb.showModal();
+    var openList = function (items, i) {
+      list = items;
+      show(i < 0 ? 0 : i);
+      if (!lb.open) lb.showModal();
+    };
+    var triggers = Array.prototype.slice.call(document.querySelectorAll('[data-lightbox-src]'));
+    var pageItems = function () {
+      return triggers.filter(function (t) { return !t.classList.contains('is-hidden'); }).map(function (t) {
+        return { src: t.getAttribute('data-lightbox-src'), cap: t.getAttribute('data-lightbox-cap') || '', el: t };
+      });
+    };
+    var openTrigger = function (t) {
+      var items = pageItems();
+      var i = 0;
+      items.forEach(function (it, k) { if (it.el === t) i = k; });
+      openList(items, i);
+    };
+    triggers.forEach(function (t) { t.addEventListener('click', function () { openTrigger(t); }); });
+    var cs = document.querySelector('[data-case-study]');
+    Array.prototype.forEach.call(document.querySelectorAll('[data-open-slide]'), function (b) {
+      b.addEventListener('click', function () {
+        var n = parseInt(b.getAttribute('data-open-slide'), 10) - 1;
+        if (!triggers[n]) return;
+        openTrigger(triggers[n]);
+        track('deck_view', { title: cs ? cs.getAttribute('data-case-study') : '', slide: n + 1, from: 'case_study' });
       });
     });
-    lb.querySelector('[data-lb-prev]').addEventListener('click', function () { show(idx - 1); });
-    lb.querySelector('[data-lb-next]').addEventListener('click', function () { show(idx + 1); });
+    Array.prototype.forEach.call(document.querySelectorAll('[data-deck]'), function (b) {
+      b.addEventListener('click', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        var srcs = [];
+        try { srcs = JSON.parse(b.getAttribute('data-deck')); } catch (err) { return; }
+        var title = b.getAttribute('data-deck-title') || '';
+        openList(srcs.map(function (src, k) { return { src: src, cap: (srcs.length > 1 ? 'slide ' + (k + 1) + ' of ' + srcs.length + ' · ' : '') + title }; }), 0);
+        track('deck_view', { title: title, slide: 1, from: 'card' });
+      });
+    });
+    lbPrev.addEventListener('click', function () { show(idx - 1); });
+    lbNext.addEventListener('click', function () { show(idx + 1); });
     lb.addEventListener('keydown', function (e) {
       if (e.key === 'ArrowLeft') show(idx - 1);
       if (e.key === 'ArrowRight') show(idx + 1);
     });
-    lb.addEventListener('click', function (e) { if (e.target === lb) lb.close(); });
     var touchX = null;
     lb.addEventListener('touchstart', function (e) { touchX = e.changedTouches[0].clientX; }, { passive: true });
     lb.addEventListener('touchend', function (e) {
@@ -289,19 +320,7 @@
       touchX = null;
       if (Math.abs(dx) > 40) show(dx < 0 ? idx + 1 : idx - 1);
     });
-    Array.prototype.forEach.call(document.querySelectorAll('[data-open-slide]'), function (b) {
-      b.addEventListener('click', function () {
-        var n = parseInt(b.getAttribute('data-open-slide'), 10) - 1;
-        if (!triggers[n]) return;
-        show(visible().indexOf(triggers[n]));
-        lb.showModal();
-        var cs = document.querySelector('[data-case-study]');
-        track('deck_view', { case_study: cs ? cs.getAttribute('data-case-study') : '', slide: n + 1 });
-      });
-    });
-    var openFirst = document.querySelector('[data-open-first]');
-    var first = document.querySelector('[data-first-slide]');
-    if (openFirst && first) openFirst.addEventListener('click', function () { first.click(); });
+    lb.addEventListener('click', function (e) { if (e.target === lb) lb.close(); });
   }
 
   /* ---------- terminal ---------- */

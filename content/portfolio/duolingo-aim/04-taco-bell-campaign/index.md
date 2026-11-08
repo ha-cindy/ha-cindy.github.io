@@ -10,4 +10,5 @@ tools: ["Gemini", "Claude Design", "Claude", "Canva"]
 bullets:
   - "Art-directed a Duolingo × Taco Bell launch: visual brief, mood board, design system, and **three AI-generated key visuals**."
   - "Ran a drift check and rewrote vague brand rules into **specific ones the AI could follow**."
+highlights: [3, 8, 10]
 ---

@@ -9,4 +9,5 @@ tools: ["Claude"]
 bullets:
   - "Found the core problem: ChatGPT lost its point of difference, so **only 4% of 1.2B weekly users pay** while Gemini and Claude match it at $20."
   - "Weighed 5 strategic courses and recommended **making trust visible first, then owning cross-app work**, under the mantra \"Your work, handled.\""
+highlights: [10, 13, 19]
 ---

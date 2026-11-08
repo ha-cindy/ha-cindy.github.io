@@ -10,4 +10,7 @@ tools: ["Claude"]
 bullets:
   - "Designed Ollie, a support assistant grounded in a **15-entry knowledge base** that hands disputed charges, grief, and safety to a person."
   - "Attacked it over 3 test rounds and turned each failure into a rule. Scores climbed from **3.6 to 4.95** out of 5."
+highlights: [3, 7, 9]
+live: "https://claude.ai/artifact/AhrpF9U6woUd6e9P4CQLCt"
+liveLabel: "chat with ollie"
 ---
