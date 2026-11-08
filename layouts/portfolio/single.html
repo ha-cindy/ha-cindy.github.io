@@ -4,6 +4,7 @@
 {{- $kind := "case study" }}{{ with .Params.assignment }}{{ $kind = printf "assignment %v" . }}{{ end }}{{ with .Params.label }}{{ $kind = . }}{{ end }}
 {{- $deck := .Resources.GetMatch "deck.pdf" }}
 {{- $slides := sort (.Resources.Match "slides/*") "Name" }}
+{{- $hl := .Params.highlights }}
 {{- $label := "" }}{{ with $col }}{{ $label = .Params.linkTitle | default .Title | lower | replaceRE "[^a-z0-9]+" "_" }}{{ end }}
 <article class="stack" data-case-study="{{ .Title }}">
   <nav class="crumbs" aria-label="Breadcrumb">
@@ -32,13 +33,57 @@
           {{- range .Params.tools }}<span class="chip chip--ghost">{{ . }}</span>{{ end }}
         </div>
         <div class="btns">
+          {{- if $hl }}
+          {{- with $slides }}<button class="btn btn--primary" type="button" data-open-slide="1">▶ view the deck</button>{{ end }}
+          {{- with .Params.live }}<a class="btn btn--chrome" href="{{ . }}" target="_blank" rel="noopener" data-track="live_open" data-track-title="{{ $.Title }}">{{ $.Params.liveLabel | default "try it live" }} ↗</a>{{ end }}
+          {{- with $deck }}<a class="text-link" href="{{ .RelPermalink }}" target="_blank" rel="noopener" data-track="deck_open" data-track-title="{{ $.Title }}">or open the pdf ↗</a>{{ end }}
+          {{- else }}
           {{- with $slides }}<button class="btn btn--chrome" type="button" data-open-first>view slides ({{ len . }})</button>{{ end }}
           {{- with $deck }}<a class="btn btn--primary" href="{{ .RelPermalink }}" target="_blank" rel="noopener" data-track="deck_open" data-track-title="{{ $.Title }}">open pdf ↗</a>{{ end }}
+          {{- end }}
         </div>
       </div>
     </div>
   </header>
 
+  {{- if and $slides $hl }}
+  {{- $total := len $slides }}
+  <section class="win" aria-label="Slide deck">
+    <div class="win__bar win__bar--dark"><span class="win__title">deck\</span><span class="win__meta">{{ $total }} slides · arrow keys or swipe</span></div>
+    <div class="win__body deck">
+      {{- $hero := (index $slides 0).Resize "1200x webp q82" }}
+      <button class="deck-hero" type="button" data-open-slide="1" aria-label="View the deck, {{ $total }} slides">
+        <img src="{{ $hero.RelPermalink }}" width="{{ $hero.Width }}" height="{{ $hero.Height }}" alt="Title slide of {{ .Title }}" decoding="async">
+        <span class="deck-hero__play"><span aria-hidden="true">▶</span> view the deck <small>{{ $total }} slides</small></span>
+      </button>
+      <div class="deck-hl">
+        <span class="eyebrow">{{ partial "sparkle.html" (dict "size" 12 "class" "is-red") }} highlights</span>
+        <div class="deck-hl__grid">
+          {{- range $hl }}
+          {{- $n := int . }}{{ with index $slides (sub $n 1) }}{{ $sm := .Resize "520x webp q74" }}
+          <button class="slide-btn" type="button" data-open-slide="{{ $n }}" aria-label="Open slide {{ $n }}">
+            <img src="{{ $sm.RelPermalink }}" width="{{ $sm.Width }}" height="{{ $sm.Height }}" alt="Slide {{ $n }} of {{ $.Title }}" loading="lazy" decoding="async">
+            <span class="slide-btn__num">{{ printf "%02d" $n }}</span>
+          </button>
+          {{- end }}{{ end }}
+        </div>
+      </div>
+      <details class="deck-all">
+        <summary>see all {{ $total }} slides</summary>
+        <div class="slides">
+        {{- range $i, $s := $slides }}
+          {{- $big := $s.Resize "1600x webp q82" }}
+          {{- $sm := $s.Resize "520x webp q74" }}
+          <button class="slide-btn" type="button" data-lightbox-src="{{ $big.RelPermalink }}" data-lightbox-cap="slide {{ add $i 1 }} of {{ len $slides }}" aria-label="Enlarge slide {{ add $i 1 }}" {{ if eq $i 0 }}data-first-slide{{ end }}>
+            <img src="{{ $sm.RelPermalink }}" width="{{ $sm.Width }}" height="{{ $sm.Height }}" alt="Slide {{ add $i 1 }} of {{ $.Title }}" loading="lazy" decoding="async">
+            <span class="slide-btn__num">{{ printf "%02d" (add $i 1) }}</span>
+          </button>
+        {{- end }}
+        </div>
+      </details>
+    </div>
+  </section>
+  {{- else }}
   {{- with $slides }}
   <section class="win" aria-label="Slides">
     <div class="win__bar win__bar--dark"><span class="win__title">slides\</span><span class="win__meta">{{ len . }} slides · click to enlarge</span></div>
@@ -55,6 +100,7 @@
       </div>
     </div>
   </section>
+  {{- end }}
   {{- end }}
 
   {{- with $col }}

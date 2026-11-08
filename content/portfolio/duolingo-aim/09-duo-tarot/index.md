@@ -7,9 +7,10 @@ summary: "a duolingo tarot reader: five taps, three cards, one prophecy, and a n
 deliverable: "15-slide deck + live tarot reader"
 skills: ["Interactive prototyping", "Conversion design", "Personalization"]
 tools: ["Claude", "Claude Code", "Claude Design"]
+highlights: [4, 9, 13]
+live: "https://ha-cindy.github.io/duo-tarot/"
+liveLabel: "try the reader"
 bullets:
   - "Built a **78-card** Duolingo tarot deck and a reader that weights every draw by your real streak, then ends on one green button: start your first lesson."
   - "Tested with **204 automated tests** and a five-second test. Birds made it read as Halloween, so I swapped in a star mark and saved green for the lesson button only."
 ---
-
-**[try the tarot reader ↗](https://ha-cindy.github.io/duo-tarot/)** works on phones and desktop.
